@@ -1,7 +1,9 @@
 import logo from './logo.svg';
-import './App.css';
+import ApiData from './components/apiClient';
+import './App.css'
 
 function App() {
+  
   return (
    <>
     <div>
@@ -14,7 +16,7 @@ function App() {
     </div>
 
      <main>
-       conteudo do main
+       <ApiData/>
      </main>
 
      <aside>
