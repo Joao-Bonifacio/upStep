@@ -8,7 +8,7 @@ export default function ApiData() {
         .then(res => res.json())
         .then(res => setUsr(res))
     })
-
+    console.log(usr)
     return(
         <div>
             testando

@@ -27,7 +27,7 @@ userData = []
 
 
 const server = http.createServer((req,res)=>{
-  res.setHeader('Access-Control-Allow-Origin','localhost')
+  res.setHeader('Access-Control-Allow-Origin','*')
   res.writeHeader(200,{'Content-Type':'text/html'})
   res.write(userData)
   res.end()
