@@ -22,9 +22,8 @@ db.connect('mongodb+srv://jhow:jhow123@cluster0.yefyj.mongodb.net/?retryWrites=t
     console.log(err.message)
 })
 
-userData = []
 
-
+var userData = []
 
 const server = http.createServer((req,res)=>{
   res.setHeader('Access-Control-Allow-Origin','*')
