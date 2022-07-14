@@ -15,7 +15,7 @@ const Usr = db.model("users",usrSchema)*/
   '{"id":3,"name":"David","privilege":"admin"}'+
 ']'*/
 
-db.connect('mongodb+srv://jhow:jhow123@cluster0.yefyj.mongodb.net/?retryWrites=true&w=majority',
+db.connect('',
 {useNewUrlParser:true,useUnifiedTopology:true}).then(()=>{
     console.log('db connected...')
 }).catch((err)=>{
