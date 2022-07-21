@@ -23,7 +23,7 @@ db.connect('mongodb+srv://jhow:jjunior123@cluster0.yefyj.mongodb.net/?retryWrite
 })
 
 
-var userData = []
+var userData = 'oi'
 
 const server = http.createServer((req,res)=>{
   res.setHeader('Access-Control-Allow-Origin','*')
