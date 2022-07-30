@@ -1,35 +1,38 @@
-const http = require('http')
-const db = require('mongoose')
+const express = require('express')
+const app = express()
+const port = process.env.port || 8090
 
-/*const usrSchema = new Schema({
-    id:String,
-    name:String,
-    privilege:String,
-    cookie:String,
-},{collection:'users'})
-const Usr = db.model("users",usrSchema)*/
+// get the client
 
-/*var userData = '['+
-  '{"id":1,"name":"Joao","privilege":"root"},'+
-  '{"id":2,"name":"Carlos","privilege":"admin"},'+
-  '{"id":3,"name":"David","privilege":"admin"}'+
-']'*/
 
-db.connect('mongodb+srv://jhow:jjunior123@cluster0.yefyj.mongodb.net/?retryWrites=true&w=majority',
-{useNewUrlParser:true,useUnifiedTopology:true}).then(()=>{
-    console.log('db connected...')
-}).catch((err)=>{
-    console.log(err.message)
+// create the connection to database
+
+
+/*/ simple query
+connection.query(
+  'SELECT * FROM users',
+  function(err, results, fields) {
+    console.log(results); // results contains rows returned by server
+    console.log(fields); // fields contains extra meta data about results, if available
+  }
+);
+*/
+
+/*/ with placeholder
+connection.query(
+  'SELECT * FROM `table` WHERE `name` = ? AND `age` > ?',
+  ['Page', 45],
+  function(err, results) {
+    console.log(results);
+  }
+);
+*/
+
+app.use('/', (req,res) => {
+  if (!req.headers.cookie) {
+    res.send()
+    //redirecionar para login
+  }
 })
 
-
-var userData = 'oi'
-
-const server = http.createServer((req,res)=>{
-  res.setHeader('Access-Control-Allow-Origin','*')
-  res.writeHeader(200,{'Content-Type':'text/html'})
-  res.write(userData)
-  res.end()
-})
-
-server.listen(8080)
+app.listen(port, () => console.log(`running on port ${port}!`))
