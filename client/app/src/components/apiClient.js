@@ -4,7 +4,8 @@ export default function ApiData() {
     const [usr,setUsr] = useState([])
 
     useEffect(()=>{
-        fetch('http://localhost:8080')
+        const headers = {"cookie": "cookie_test"}
+        fetch('http://localhost:8090',headers)
         .then(res => res.json())
         .then(res => setUsr(res))
     })
