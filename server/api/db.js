@@ -1,5 +1,3 @@
-const { connection } = require('mongoose')
-
 //db connect
 const connect = async ()=>{
     if ( global.db && global.db.state != 'disconected' ) {return global.db}
@@ -19,7 +17,7 @@ const usrSelect = async (i)=>{
         return await list
     }else{
         const [uniq] = await conection.query( `SELECT * FROM usr WHERE id=${i}` )
-        return uniq
+        return await uniq
     }
 }
 

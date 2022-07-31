@@ -2,10 +2,10 @@ import {React, useState, useEffect} from 'react'
 
 export default function ApiData() {
     const [usr,setUsr] = useState([])
+    document.cookie = "25"
 
     useEffect(()=>{
-        const headers = {"cookie": "cookie_test"}
-        fetch('http://localhost:8090',headers)
+        fetch('http://localhost:8080')
         .then(res => res.json())
         .then(res => setUsr(res))
     })

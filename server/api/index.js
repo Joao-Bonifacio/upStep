@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = process.env.port || 8090
+const port = process.env.port || 8080
 
 // create the connection to database
 const mysql = async ( f, data )=>{
@@ -17,8 +17,7 @@ const mysql = async ( f, data )=>{
       await db.usrDelete( data )
       break;
     case 'list':
-      const users = await db.usrSelect( data )
-      console.log(users)
+      await db.usrSelect( data )
       break;
     default:
       console.log('DB miss...')
@@ -26,13 +25,16 @@ const mysql = async ( f, data )=>{
 }
 //mysql('insert',{name:'Jhow',born:'2001-05-02',sex:'M',country:'Brasil',id:'2'})
 //mysql('delete',3)
-mysql('list',25)
-
-app.use('/', (req,res) => {
-  if (!req.headers.cookie) {
-    res.send()
-    //redirecionar para login
+//mysql('list',23)
+async function apiSend(req, res){
+  if (req.headers.cookie) {
+    const sendData = mysql( 'list', req.headers.cookie )
+    const data = JSON.stringify(sendData)
+    console.log(sendData)
+    console.log(data)
+    return await res.send(data)
   }
-})
+}
+app.get('/', apiSend)
 
 app.listen(port, () => console.log(`running on port ${port}!`))
