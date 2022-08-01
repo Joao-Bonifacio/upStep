@@ -31,6 +31,6 @@ app.get('/',async (req,res)=>{
     res.send(data)
   }
 })
-let msg = 'b43e19bcdf3fe7dadaaeb7e6996d430e'
-console.log(msg.length)
+//let msg = 'b43e19bcdf3fe7dadaaeb7e6996d430e'
+//console.log(msg.length)
 app.listen(port, () => console.log(`running on port ${port}!`))
