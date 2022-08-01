@@ -9,32 +9,26 @@ const connect = async ()=>{
 }
 
 //select data
-const usrSelect = async (i)=>{
+const usrSelect = async (data)=>{
     const conection = await connect()
-
-    if (typeof(i) == 'string') {
-        const [list] = await conection.query( 'SELECT * FROM usr' )
-        return await list
-    }else{
-        const [uniq] = await conection.query( `SELECT * FROM usr WHERE id=${i}` )
-        return await uniq
-    }
+    const [uniq] = await conection.query( `SELECT * FROM usr WHERE id=${data}` )
+    return await uniq
 }
 
 //insert data
 const usrInsert = async (data)=>{
     const connection = await connect()
-    const sql = `INSERT INTO usr ( name, born, sex, country ) VALUES ( ?,?,?,? )`
+    const sql = `INSERT INTO usr ( id, name, born, sex, country, password ) VALUES ( ?,?,?,?,?,? )`
     const values = [ data.name, data.born, data.sex, data.country ]
     console.log(sql,values)
     await connection.query( sql,values )
 }
 
 //update data
-const usrUpdate = async (id,u)=>{
+const usrUpdate = async (u)=>{
     const connection = await connect()
-    const sql = 'UPDATE usr SET name=?, born=? sex=?, country=? WHERE id=?'
-    const values = [ u.name, u.born, u.sex, u.country, id ]
+    const sql = 'UPDATE usr SET name=?, born=? sex=?, country=?, password=? WHERE id=?'
+    const values = [ u.name, u.born, u.sex, u.country, u.password, u.id ]
     await connection.query( sql, values )
 }
 

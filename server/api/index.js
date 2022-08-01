@@ -11,7 +11,7 @@ const mysql = async ( f, data )=>{
       return await db.usrInsert( data )
       break;
     case 'update':
-      return await db.usrUpdate( data.id, data )
+      return await db.usrUpdate( data )
       break;
     case 'delete':
       return await db.usrDelete( data )
