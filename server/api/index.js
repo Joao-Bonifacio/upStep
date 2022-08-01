@@ -8,33 +8,29 @@ const mysql = async ( f, data )=>{
   
   switch (f) {
     case 'insert':
-      await db.usrInsert( data )
+      return await db.usrInsert( data )
       break;
     case 'update':
-      await db.usrUpdate( data.id, data )
+      return await db.usrUpdate( data.id, data )
       break;
     case 'delete':
-      await db.usrDelete( data )
+      return await db.usrDelete( data )
       break;
     case 'list':
-      await db.usrSelect( data )
+      return await db.usrSelect( data )
       break;
     default:
       console.log('DB miss...')
   }
 }
-//mysql('insert',{name:'Jhow',born:'2001-05-02',sex:'M',country:'Brasil',id:'2'})
-//mysql('delete',3)
-//mysql('list',23)
-async function apiSend(req, res){
-  if (req.headers.cookie) {
-    const sendData = mysql( 'list', req.headers.cookie )
-    const data = JSON.stringify(sendData)
-    console.log(sendData)
-    console.log(data)
-    return await res.send(data)
-  }
-}
-app.get('/', apiSend)
 
+app.get('/',async (req,res)=>{
+  if (req.headers.cookie) {
+    const sendData = await mysql( 'list', Number(req.headers.cookie) )
+    const data = JSON.stringify(sendData)
+    res.send(data)
+  }
+})
+let msg = 'b43e19bcdf3fe7dadaaeb7e6996d430e'
+console.log(msg.length)
 app.listen(port, () => console.log(`running on port ${port}!`))
