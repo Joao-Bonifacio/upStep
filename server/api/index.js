@@ -26,7 +26,7 @@ const mysql = async ( f, data )=>{
 
 app.get('/',async (req,res)=>{
   if (req.headers.cookie) {
-    const sendData = await mysql( 'list', Number(req.headers.cookie) )
+    const sendData = await mysql( 'list', req.headers.cookie )
     const data = JSON.stringify(sendData)
     res.send(data)
   }
