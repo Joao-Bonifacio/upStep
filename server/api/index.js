@@ -1,6 +1,6 @@
 const express = require('express')
-const app = express()
 const port = process.env.port || 8080
+const app = express()
 
 // create the connection to database
 const mysql = async ( f, data )=>{
