@@ -13,7 +13,7 @@ const usrSelect = async (data)=>{
     const conection = await connect()
     const sql = 'SELECT * FROM usr WHERE id=?'
     const values = data
-    const [uniq] = await conection.query( sql, values )
+    const [ uniq ] = await conection.query( sql, values )
     return await uniq
 }
 

@@ -9,12 +9,10 @@ export default async function ApiData() {
         .then(res => res.json())
         .then(res => setUsr(res))
     })
-    return(
+    return await (
         <div>
-            testando
-            {data.map(e=>
-                <div key={e.id}>{e.name}</div>
-            )}
+            oi
+            <script>console.log(res)</script>
         </div>
     )
 }
