@@ -25,11 +25,11 @@ const mysql = async ( f, data )=>{
 }
 
 app.get('/',async ( req,res )=>{
-  if (req.headers.cookie) {
-    const sendData = await mysql( 'list', req.headers.cookie )
-    //const data = JSON.stringify( sendData )
-    res.send( sendData )
-  }
+  //if (!req.headers.key) {
+    const sendData = await mysql( 'list', 'b43e19bcdf3fe7dadaaeb7e6996d430e' )
+    const data = JSON.stringify( sendData )
+    await res.send( data )
+  //}
 })
 //let msg = 'b43e19bcdf3fe7dadaaeb7e6996d430e'
 //console.log(msg.length)
