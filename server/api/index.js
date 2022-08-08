@@ -24,12 +24,13 @@ const mysql = async ( f, data )=>{
   }
 }
 
-app.get('/',async ( req,res )=>{
-  //if (!req.headers.key) {
+app.get('/',( req,res )=>{
+  res.setHeader('Access-Control-Allow-Origin','*')
+  (async()=>{
     const sendData = await mysql( 'list', 'b43e19bcdf3fe7dadaaeb7e6996d430e' )
-    const data = JSON.stringify( sendData )
-    await res.send( data )
-  //}
+    //const data = JSON.stringify( sendData )
+    await res.send( sendData )
+  })
 })
 //let msg = 'b43e19bcdf3fe7dadaaeb7e6996d430e'
 //console.log(msg.length)

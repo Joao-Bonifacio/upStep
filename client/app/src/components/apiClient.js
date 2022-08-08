@@ -1,18 +1,17 @@
 import {React, useState, useEffect} from 'react'
 
-export default async function ApiData() {
+export default function ApiData() {
     const [usr,setUsr] = useState([])
-    document.cookie = "25"
 
     useEffect(()=>{
         fetch('http://localhost:8080')
         .then(res => res.json())
         .then(res => setUsr(res))
     })
-    return await (
+    return(
         <div>
             oi
-            <script>console.log(res)</script>
+            <script>{console.log(usr)}</script>
         </div>
     )
 }
