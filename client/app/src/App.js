@@ -7,7 +7,7 @@ function App() {
   return (
    <>
     <div>
-      <img src='#' id='logo'/>
+      <img src='./logo.svg' id='logo'/>
       <nav>
         <span>HOME</span>
         <span>SOBRE</span>
