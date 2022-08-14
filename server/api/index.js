@@ -32,11 +32,8 @@ const mysql = async ( f, data )=>{
 }
 
 app.get('/', cors(corsOptions),async ( req,res )=>{
-  //req.setHeader('Access-Control-Allow-Origin','*')
-  
   const sendData = await mysql( 'list', 'b43e19bcdf3fe7dadaaeb7e6996d430e' )
-  res.json( {sendData} )
-  
+  res.json( sendData[0] )
 })
 //let msg = 'b43e19bcdf3fe7dadaaeb7e6996d430e'
 //console.log(msg.length)
