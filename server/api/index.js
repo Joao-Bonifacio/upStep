@@ -6,7 +6,7 @@ app.use(express.json())
 
 // set cors
 const corsOptions = {
-  orign: '*',
+  orign: 'http://localhost:3000',
   optionsSuccessStatus: 200
 }
 // create the connection to database
@@ -32,8 +32,14 @@ const mysql = async ( f, data )=>{
 }
 
 app.get('/', cors(corsOptions),async ( req,res )=>{
-  const sendData = await mysql( 'list', 'b43e19bcdf3fe7dadaaeb7e6996d430e' )
-  res.json( sendData[0] )
+  if (req.headers.cookie) {
+    let ck = req.headers.cookie.split('=')
+    const sendData = await mysql( 'list', ck[1] )
+    console.log(ck[1])
+    res.json( sendData[0] )
+  }else{
+    //redirecionar para /login
+  }
 })
 //let msg = 'b43e19bcdf3fe7dadaaeb7e6996d430e'
 //console.log(msg.length)
