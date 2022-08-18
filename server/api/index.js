@@ -7,6 +7,8 @@ app.use(express.json())
 // set cors
 const corsOptions = {
   orign: 'http://localhost:3000',
+  preflightContinue: true,
+  credentials: true,
   optionsSuccessStatus: 200
 }
 // create the connection to database
