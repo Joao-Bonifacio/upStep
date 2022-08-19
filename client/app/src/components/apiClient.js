@@ -12,12 +12,13 @@ export default function ApiData() {
         })
         .then(res => res.json())
         .then(res => setUsr(res))
+        //.then(res => console.log(res))
         //.catch(error => console.log(error.message))
     },[])
     
     return(
         <div>
-            {usr.name}
+            {usr[0].name}
             <script>{console.log(usr)}</script>
         </div>
     )
