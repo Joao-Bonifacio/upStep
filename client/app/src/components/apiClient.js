@@ -4,22 +4,20 @@ export default function ApiData() {
     const [usr,setUsr] = useState([])
 
     useEffect(()=>{
-        fetch('http://localhost:8080',{
-            method:'GET',
-            'Access-Control-Allow-Origin':'http://localhost:8080',
-            credentials:'same-origin',
-            cookie:document.cookie
-        })
+        let headers = {
+            'accept': 'application/json',
+            'Cookie': document.cookie,
+            'origin':'same-origin'
+        }
+        fetch('http://localhost:8080',{ headers: headers })
         .then(res => res.json())
+        .then(console.log(document.cookie))
         .then(res => setUsr(res))
-        //.then(res => console.log(res))
-        //.catch(error => console.log(error.message))
     },[])
     
     return(
         <div>
-            {usr[0].name}
-            <script>{console.log(usr)}</script>
+            {usr.name}
         </div>
     )
 }

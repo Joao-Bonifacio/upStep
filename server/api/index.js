@@ -5,10 +5,11 @@ const cors = require('cors')
 const port = process.env.port || 8080
 const app = express()
 app.use(express.json())
+app.use(cors())
 
 // set cors
 const corsOptions = {
-  orign: 'http://localhost:3000',
+  orign: ['http://localhost:3000','http://172.29.202.158:3000'],
   preflightContinue: true,
   credentials: true,
   optionsSuccessStatus: 200
@@ -39,10 +40,14 @@ app.get('/', cors(corsOptions),async ( req,res )=>{
   if (req.headers.cookie) {
     let ck = req.headers.cookie.split('=')
     const sendData = await mysql( 'list', ck[1] )
-    console.log(ck[1])
+    console.log(req.headers)
     res.json( sendData[0] )
   }else{
     //redirecionar para /login
+    /*
+    const sendData = await mysql( 'list', 'b43e19bcdf3fe7dadaaeb7e6996d430e' )
+    console.log(req.headers)
+    res.json(sendData[0])*/
   }
 })
 //let msg = 'b43e19bcdf3fe7dadaaeb7e6996d430e'
