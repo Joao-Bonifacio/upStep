@@ -5,9 +5,8 @@ export default function ApiData() {
 
     useEffect(()=>{
         let headers = {
-            'Access-Control-Allow-Origin':'*',
             'accept': 'application/json',
-            'Cookie': document.cookie,
+            'key': document.cookie,
             'origin':'same-origin'
         }
         fetch('http://localhost:8080',{ headers: headers })
