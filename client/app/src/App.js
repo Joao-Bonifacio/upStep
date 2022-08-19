@@ -8,9 +8,7 @@ function App() {
    <>
     <div>
       <nav>
-        <span>HOME</span>
-        <span>SOBRE</span>
-        <span>CONTATO</span>
+        
       </nav>
     </div>
 
@@ -19,7 +17,7 @@ function App() {
      </main>
 
      <aside>
-       conteudo lateral
+       
      </aside>
    </>
   )
