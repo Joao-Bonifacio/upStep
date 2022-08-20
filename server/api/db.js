@@ -9,9 +9,17 @@ const connect = async ()=>{
 }
 
 //select data
-const usrSelect = async (data)=>{
+const usrSelect = async ( data, field )=>{
     const conection = await connect()
-    const sql = 'SELECT * FROM usr WHERE id=?'
+    if (field == 'login') {
+        sql = 'SELECT * FROM usr WHERE login=?'
+    }else if(field == 'id'){
+        sql = 'SELECT * FROM usr WHERE id=?'
+    }else if(field == 'name'){
+        sql = 'SELECT * FROM usr WHERE name=?'
+    }else if(field == 'password'){
+        sql = 'SELECT * FROM usr WHERE password=?'
+    }
     const values = data
     const [ uniq ] = await conection.query( sql, values )
     return await uniq
