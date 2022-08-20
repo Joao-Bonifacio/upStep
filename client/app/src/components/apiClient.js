@@ -12,12 +12,10 @@ export default function ApiData() {
         fetch('http://localhost:8080',{ headers: headers })
         .then(res => res.json())
         .then(res => setUsr(res))
-        .then(res => console.log(res))
     },[])
     
     return(
         <div>
-            {usr.badRequest}
             {usr.name}
         </div>
     )

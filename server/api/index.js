@@ -36,7 +36,7 @@ const mysql = async ( f, data )=>{
   }
 }
 
-app.get('/', cors(corsOptions),async ( req,res )=>{
+app.get('/', cors(corsOptions),async ( req,res,next )=>{
   if (req.headers.key) {
     let ck = req.headers.key.split('=')
     const sendData = await mysql( 'list', ck[1] )
@@ -44,6 +44,7 @@ app.get('/', cors(corsOptions),async ( req,res )=>{
   }else{
     res.json( {badRequest:'cookie is not defined'} )
     //redirect to /login
+    next('http://localhost/login:3000')
   }
 })
 //const id = 'b43e19bcdf3fe7dadaaeb7e6996d430e'
