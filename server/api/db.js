@@ -11,14 +11,16 @@ const connect = async ()=>{
 //select data
 const usrSelect = async ( data, field )=>{
     const conection = await connect()
-    if (field == 'login') {
-        sql = 'SELECT * FROM usr WHERE login=?'
+    if (field == 'email') {
+        sql = 'SELECT * FROM usr WHERE email=?'
     }else if(field == 'id'){
         sql = 'SELECT * FROM usr WHERE id=?'
     }else if(field == 'name'){
         sql = 'SELECT * FROM usr WHERE name=?'
     }else if(field == 'password'){
         sql = 'SELECT * FROM usr WHERE password=?'
+    }else{
+        console.log('invalid params...')
     }
     const values = data
     const [ uniq ] = await conection.query( sql, values )
@@ -28,8 +30,8 @@ const usrSelect = async ( data, field )=>{
 //insert data
 const usrInsert = async (data)=>{
     const connection = await connect()
-    const sql = `INSERT INTO usr ( id, name, born, sex, country, password ) VALUES ( ?,?,?,?,?,? )`
-    const values = [ data.name, data.born, data.sex, data.country ]
+    const sql = `INSERT INTO usr ( id, name, email, password, born, sex, country ) VALUES ( ?,?,?,?,?,?,? )`
+    const values = [ data.id, data.name , data.email, data.password, data.born, data.sex, data.country ]
     console.log(sql,values)
     await connection.query( sql,values )
 }
@@ -37,8 +39,8 @@ const usrInsert = async (data)=>{
 //update data
 const usrUpdate = async (u)=>{
     const connection = await connect()
-    const sql = 'UPDATE usr SET name=?, born=? sex=?, country=?, password=? WHERE id=?'
-    const values = [ u.name, u.born, u.sex, u.country, u.password, u.id ]
+    const sql = 'UPDATE usr SET name=?, email=?, password=?, born=? sex=?, country=? WHERE id=?'
+    const values = [ u.name, u.email, u.password, u.born, u.sex, u.country, u.id ]
     await connection.query( sql, values )
 }
 
@@ -46,7 +48,7 @@ const usrUpdate = async (u)=>{
 const usrDelete = async (id)=>{
     const connection = await connect()
     const sql = 'DELETE FROM usr WHERE id=?'
-    const values = [ id ]
+    const values = id
     await connection.query( sql, values )
 }
 
