@@ -63,6 +63,9 @@ app.post('/login', cors(corsOptions),async ( req,res )=>{
   
   const dadosDB = await mysql('list',login,'email')
   if (dadosDB.lenght > 0) {
+
+    const passwd = await bcrypt.compare( password, dadosDB[0].password )
+
     cookie = dadosDB[0].id
     res.redirect('/auth')
   }else{
