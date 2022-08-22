@@ -1,14 +1,16 @@
-//import {React, useState, useEffect} from 'react'
-
-export default function Login(props){
-    
-    return(
-        <>
-            <form method={'POST'} action={'http://localhost:8080/login'}>
-                <input type={'text'} name={'login'} placeholder={'login'} required/>
-                <input type={'password'} name={'password'} placeholder={'password'} required/>
-                <input type={'submit'} value={'Submit'} />
-            </form>
-        </>
-    )
+export default function Login(){
+    while (!document.cookie) {
+        return(
+            <>
+                <form method={'POST'} action={'http://localhost:8080/login'}>
+                    <input type={'email'} name={'login'} placeholder={'login'} required/>
+                    <input type={'password'} name={'password'} placeholder={'password'} required/>
+                    <input type={'submit'} value={'Submit'} />
+                </form>
+            </>
+        )
+    }
+    if(document.cookie){
+        window.location.href = 'http://localhost:3000'
+    }
 }

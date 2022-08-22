@@ -9,11 +9,12 @@ export default function ApiData() {
             'method': 'GET',
             'accept': 'application/json',
             'key': document.cookie,
+            'redirect': 'follow',
             'origin': 'same-origin'
         }
         fetch('http://localhost:8080',{ headers: headers })
-        .then(res => res.json())
-        .then(res => setUsr(res))
+            .then(res => res.json())
+            .then(res => setUsr(res))
     },[])
     
     if (document.cookie) {

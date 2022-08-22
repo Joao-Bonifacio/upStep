@@ -1,13 +1,16 @@
 const express = require('express')
 const cors = require('cors')
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 const bcrypt = require('bcryptjs')
 const md5 = require('crypto')
 //const jwt = require('jsonwebtoken')
 const port = process.env.port || 8080
 const app = express()
+
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
+app.use(cookieParser())
 app.use(express.json())
 app.use(cors())
 var cookie = ''
@@ -55,7 +58,9 @@ app.get('/', cors(corsOptions),async ( req,res )=>{
   }
 })
 app.get('/login',(req,res)=>{
-  res.redirect('http://localhost:3000')
+  if (cookie.length == 32) {
+    res.json({key:cookie,expires:432000})
+  }
 })
 app.post('/login', cors(corsOptions),async ( req,res )=>{
   const login = req.body.login
@@ -66,10 +71,13 @@ app.post('/login', cors(corsOptions),async ( req,res )=>{
 
     const passwd = await bcrypt.compare( password, dadosDB[0].password )
 
-    cookie = dadosDB[0].id
-    res.redirect('/auth')
+    if (dadosDB[0].email == login && dadosDB[0].password == passwd) {
+      cookie = dadosDB[0].id.split('=')[1]
+      await res.cookie('key',cookie,{expires: new Date(Date.now() + 99999), httpOnly: false})
+      res.redirect('http://localhost:8080')
+    }
   }else{
-    res.redirect('/')
+    
   }
 })
 app.post('/sign', cors(corsOptions), async(req,res)=>{
@@ -88,13 +96,6 @@ app.post('/sign', cors(corsOptions), async(req,res)=>{
   const hashPassword = await bcrypt.hash(password, 10)
 
   await mysql('insert',{id:hashId,name:name,email:login,password:hashPassword,born:born,sex:sex,country:country})
-})
-app.get('/auth', cors(corsOptions), (req,res)=>{
-  if (cookie) {
-    res.json({key: cookie})
-  }else{
-    res.redirect('/login')
-  }
 })
 
 //const id = '04ff27090f4978d7f32636422abfb4e9'
