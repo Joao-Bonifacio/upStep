@@ -72,12 +72,16 @@ app.post('/login', cors(corsOptions),async ( req,res )=>{
     const passwd = await bcrypt.compare( password, dadosDB[0].password )
 
     if (dadosDB[0].email == login && dadosDB[0].password == passwd) {
-      cookie = dadosDB[0].id.split('=')[1]
-      await res.cookie('key',cookie,{expires: new Date(Date.now() + 99999), httpOnly: false})
-      res.redirect('http://localhost:8080')
+      cookie = dadosDB[0].id.split('=')
+      let options = {
+        path:'/*',
+        domain:'devghost.ddns.net',
+        httpOnly: true,
+        maxAge: (1000 * 60 * 60 * 24)
+      }
+      res.status(200).cookie('key',cookie[1],options)
+      //res.redirect('/')
     }
-  }else{
-    
   }
 })
 app.post('/sign', cors(corsOptions), async(req,res)=>{
