@@ -74,12 +74,12 @@ app.post('/login', cors(corsOptions),async ( req,res )=>{
     if (dadosDB[0].email == login && dadosDB[0].password == passwd) {
       cookie = dadosDB[0].id.split('=')
       let options = {
-        path:'/*',
-        domain:'devghost.ddns.net',
+        path:'*/*',
+        domain:'jj.me',
         httpOnly: true,
         maxAge: (1000 * 60 * 60 * 24)
       }
-      res.status(200).cookie('key',cookie[1],options)
+      res.cookie('key',cookie[1],options)
       //res.redirect('/')
     }
   }
