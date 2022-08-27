@@ -2,7 +2,7 @@ export default function Login(){
     while (!document.cookie) {
         return(
             <>
-                <form method={'POST'} action={'http://jj.me:8080/login'}>
+                <form method={'POST'} action={'http://localhost:8080/login'}>
                     <input type={'email'} name={'login'} placeholder={'login'} required/>
                     <input type={'password'} name={'password'} placeholder={'password'} required/>
                     <input type={'submit'} value={'Submit'} />

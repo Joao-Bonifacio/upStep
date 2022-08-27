@@ -17,7 +17,7 @@ var cookie = ''
 
 // set cors
 const corsOptions = {
-  orign: ['http://localhost:3000','http://localhost:3000/login'],
+  orign: ['http://jj.me:3000','http://jj.me:3000/login'],
   preflightContinue: true,
   credentials: true,
   optionsSuccessStatus: 200
