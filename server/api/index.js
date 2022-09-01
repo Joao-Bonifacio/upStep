@@ -17,7 +17,7 @@ var cookie = ''
 
 // set cors
 const corsOptions = {
-  orign: ['http://jj.me:3000','http://jj.me:3000/login'],
+  orign: 'http://localhost:3000',
   preflightContinue: true,
   credentials: true,
   optionsSuccessStatus: 200
@@ -52,16 +52,13 @@ app.get('/', cors(corsOptions),async ( req,res )=>{
     sendData[0].email = undefined
     sendData[0].password = undefined
 
+    console.log(sendData[0])
     res.json( sendData[0] )
   }else{
     res.redirect('/login')
   }
 })
-app.get('/login',(req,res)=>{
-  if (cookie.length == 32) {
-    res.json({key:cookie,expires:432000})
-  }
-})
+/**/
 app.post('/login', cors(corsOptions),async ( req,res )=>{
   const login = req.body.login
   const password = req.body.password
@@ -79,9 +76,16 @@ app.post('/login', cors(corsOptions),async ( req,res )=>{
         httpOnly: true,
         maxAge: (1000 * 60 * 60 * 24)
       }
-      res.cookie('key',cookie[1],options)
+      //res.cookie('key',cookie[1],options)
       //res.redirect('/')
+      next()
     }
+  }
+})
+app.get('/login',(req,res)=>{
+  if (cookie.length == 32) {
+    //res.json({key:cookie,expires:432000})
+    res.cookie('key',cookie[1],options)
   }
 })
 app.post('/sign', cors(corsOptions), async(req,res)=>{
