@@ -17,7 +17,7 @@ var cookie = ''
 
 // set cors
 const corsOptions = {
-  orign: 'http://localhost:3000',
+  orign: ['http://localhost:3000','http://localhost:3000/login','http://jj.me:3000','http://jj.me:3000/login','http://jj.me:3000/auth'],
   preflightContinue: true,
   credentials: true,
   optionsSuccessStatus: 200
@@ -52,42 +52,47 @@ app.get('/', cors(corsOptions),async ( req,res )=>{
     sendData[0].email = undefined
     sendData[0].password = undefined
 
-    console.log(sendData[0])
+    //console.log(sendData[0])
     res.json( sendData[0] )
   }else{
     res.redirect('/login')
   }
 })
 /**/
-app.post('/login', cors(corsOptions),async ( req,res )=>{
-  const login = req.body.login
-  const password = req.body.password
+app.post('/login', cors(corsOptions),async ( req,res,next )=>{
+  const { login } = req.body
+  const { password } = req.body
   
   const dadosDB = await mysql('list',login,'email')
-  if (dadosDB.lenght > 0) {
 
     const passwd = await bcrypt.compare( password, dadosDB[0].password )
 
-    if (dadosDB[0].email == login && dadosDB[0].password == passwd) {
+    if (dadosDB[0].email == login && passwd) {
       cookie = dadosDB[0].id.split('=')
-      let options = {
-        path:'*/*',
-        domain:'jj.me',
-        httpOnly: true,
-        maxAge: (1000 * 60 * 60 * 24)
-      }
+
       //res.cookie('key',cookie[1],options)
       //res.redirect('/')
       next()
-    }
   }
 })
-app.get('/login',(req,res)=>{
+
+app.get('/login', cors(corsOptions),(req,res)=>{
   if (cookie.length == 32) {
+    let options = {
+      //path:'',
+      domain:'jj.me',
+      httpOnly: true,
+      maxAge: (1000 * 60 * 60 * 24)
+    }
     //res.json({key:cookie,expires:432000})
+    console.log(cookie)
     res.cookie('key',cookie[1],options)
+    res.status(200).json({msg:'You get in...'})
+  }else{
+    res.json({key:cookie})
   }
 })
+
 app.post('/sign', cors(corsOptions), async(req,res)=>{
 
 
