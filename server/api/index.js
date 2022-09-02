@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser')
 const bcrypt = require('bcryptjs')
 const md5 = require('crypto')
 //const jwt = require('jsonwebtoken')
-const port = process.env.port || 8080
+const port = process.env.PORT || 8080
 const app = express()
 
 app.use(bodyParser.urlencoded({extended: true}))
@@ -59,7 +59,7 @@ app.get('/', cors(corsOptions),async ( req,res )=>{
   }
 })
 /**/
-app.post('/login', cors(corsOptions),async ( req,res,next )=>{
+app.post('/login', cors(corsOptions),async ( req,res )=>{
   const { login } = req.body
   const { password } = req.body
   
@@ -68,18 +68,18 @@ app.post('/login', cors(corsOptions),async ( req,res,next )=>{
     const passwd = await bcrypt.compare( password, dadosDB[0].password )
 
     if (dadosDB[0].email == login && passwd) {
-      cookie = dadosDB[0].id.split('=')
-
-      //res.cookie('key',cookie[1],options)
-      //res.redirect('/')
-      next()
+      cookie = dadosDB[0].id
+      res.set( 'Content-Type', 'text/html' )
+      res.send(`<script>window.location.href = 'http://jj.me:3000?key=${cookie}'</script>`)
   }
 })
 
 app.get('/login', cors(corsOptions),(req,res)=>{
   if (cookie.length == 32) {
-    let options = {
-      //path:'',
+    res.set( 'Content-Type', 'text/html' )
+    res.send(`<script>window.location.href = 'http://jj.me:3000?key=${cookie}'</script>`)
+    /*let options = {
+      path:'',
       domain:'jj.me',
       httpOnly: true,
       maxAge: (1000 * 60 * 60 * 24)
@@ -87,9 +87,9 @@ app.get('/login', cors(corsOptions),(req,res)=>{
     //res.json({key:cookie,expires:432000})
     console.log(cookie)
     res.cookie('key',cookie[1],options)
-    res.status(200).json({msg:'You get in...'})
+    //res.status(200).json({msg:'You get in...'})
   }else{
-    res.json({key:cookie})
+    res.json({'Error':'Bad auth...'})*/
   }
 })
 
@@ -106,9 +106,9 @@ app.post('/sign', cors(corsOptions), async(req,res)=>{
 
   const id = login+password
   const hashId = await md5.createHash('md5').update(id).digest('hex')
-  const hashPassword = await bcrypt.hash(password, 10)
+  const hashPassd = await bcrypt.hash(password, 10)
 
-  await mysql('insert',{id:hashId,name:name,email:login,password:hashPassword,born:born,sex:sex,country:country})
+  await mysql('insert',{id:hashId,name:name,email:login,password:hashPassd,born:born,sex:sex,country:country})
 })
 
 //const id = '04ff27090f4978d7f32636422abfb4e9'

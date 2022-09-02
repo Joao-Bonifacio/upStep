@@ -23,10 +23,18 @@ export default function ApiData() {
                 {usr.name}
             </div>
         )
-    }else{
+    }else if(window.location.href.includes('?')){
+        let url = window.location.href.split('?')
+        //let exp = new Date(new Date().getTime() + 15 * 60 * 1000)
+        document.cookie = `${url[1]}; expires=Thu, 29 Nov 00:00:00 UTC;`
+        console.log(document.cookie)
+        console.log(url)
+        setTimeout(() => { window.location.href = 'http://jj.me:3000/' }, 5000);
+    }else if(!window.location.href.includes('?') && !document.cookie){
         return (
             <>
                 <Login/>
             </>
-    )}
+        )
+    }
 }

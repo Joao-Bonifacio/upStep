@@ -10,8 +10,4 @@ export default function Login(){
             </>
         )
     }
-    
-    if(document.cookie){
-        window.location.href = 'http://jj.me:3000'
-    }
 }
