@@ -54,11 +54,11 @@ app.get('/', cors(corsOptions),async ( req,res )=>{
 
     //console.log(sendData[0])
     res.json( sendData[0] )
-  }/*else{
-    res.redirect('http://jj.me:3000/login')
-  }*/
+  }else{
+    res.json({'Error':'Bad auth'})
+  }
 })
-/**/
+
 app.post('/login', cors(corsOptions),async ( req,res )=>{
   const { login } = req.body
   const { password } = req.body
@@ -73,27 +73,6 @@ app.post('/login', cors(corsOptions),async ( req,res )=>{
     res.send(`<script>window.location.href = 'http://jj.me:3000?key=${cookie}'</script>`)
   }
 })
-
-/*
-app.get('/login', cors(corsOptions),(req,res)=>{
-  if (cookie.length == 32) {
-    res.set( 'Content-Type', 'text/html' )
-    res.send(`<script>window.location.href = 'http://jj.me:3000?key=${cookie}'</script>`)
-    let options = {
-      path:'',
-      domain:'jj.me',
-      httpOnly: true,
-      maxAge: (1000 * 60 * 60 * 24)
-    }
-    //res.json({key:cookie,expires:432000})
-    console.log(cookie)
-    res.cookie('key',cookie[1],options)
-    //res.status(200).json({msg:'You get in...'})
-  }else{
-    res.json({'Error':'Bad auth...'})
-  }
-})
-*/
 
 app.post('/sigin', cors(corsOptions), async(req,res)=>{
   //depois das validações
