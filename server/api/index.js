@@ -54,9 +54,9 @@ app.get('/', cors(corsOptions),async ( req,res )=>{
 
     //console.log(sendData[0])
     res.json( sendData[0] )
-  }else{
+  }/*else{
     res.redirect('/login')
-  }
+  }*/
 })
 /**/
 app.post('/login', cors(corsOptions),async ( req,res )=>{

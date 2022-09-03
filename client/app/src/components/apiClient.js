@@ -37,7 +37,7 @@ export default function ApiData() {
                 <Login/>
             </>
         )
-    }else if(window.location.href.includes('!')){
+    }else if(window.location.href.includes('sigin')){
         return (
             <>
                 <Sigin/>
