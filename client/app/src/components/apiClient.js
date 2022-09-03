@@ -1,5 +1,6 @@
 import {React, useState, useEffect} from 'react'
 import Login from './login'
+import Sigin from './sigin'
 
 export default function ApiData() {
     const [usr,setUsr] = useState([])
@@ -34,6 +35,12 @@ export default function ApiData() {
         return (
             <>
                 <Login/>
+            </>
+        )
+    }else if(window.location.href.includes('!')){
+        return (
+            <>
+                <Sigin/>
             </>
         )
     }

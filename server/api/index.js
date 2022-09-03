@@ -94,21 +94,24 @@ app.get('/login', cors(corsOptions),(req,res)=>{
 })
 
 app.post('/sign', cors(corsOptions), async(req,res)=>{
-
-
   //depois das validações
-  const login = req.body.login
-  const password = req.body.password
-  const name = req.body.name
-  const born = req.body.born
-  const sex = req.body.sex
-  const country = req.body.country
+  const { login } = req.body
+  const { password } = req.body
+  const { name } = req.body
+  const { born } = req.body
+  const { sex } = req.body
+  const { country } = req.body
+
+  console.log(login,' : ',password,' : ',name,' : ',born,' : ',sex,' : ',country)
 
   const id = login+password
   const hashId = await md5.createHash('md5').update(id).digest('hex')
-  const hashPassd = await bcrypt.hash(password, 10)
+  const hashPasswd = await bcrypt.hash(password, 10)
 
-  await mysql('insert',{id:hashId,name:name,email:login,password:hashPassd,born:born,sex:sex,country:country})
+  await mysql('insert',{id:hashId,name:name,email:login,password:hashPasswd,born:born,sex:sex,country:country})
+
+  res.set( 'Content-Type', 'text/html' )
+  res.send( `<script>window.location.href = 'http://jj.me:3000'</script>` )
 })
 
 //const id = '04ff27090f4978d7f32636422abfb4e9'
