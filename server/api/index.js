@@ -17,7 +17,7 @@ var cookie = ''
 
 // set cors
 const corsOptions = {
-  orign: ['http://localhost:3000','http://localhost:3000/login','http://jj.me:3000','http://jj.me:3000/login','http://jj.me:3000/auth'],
+  orign: ['http://localhost:3000','http://localhost:3000/login','http://jj.me:3000','http://jj.me:3000/login','http://jj.me:3000/sigin'],
   preflightContinue: true,
   credentials: true,
   optionsSuccessStatus: 200
@@ -55,7 +55,7 @@ app.get('/', cors(corsOptions),async ( req,res )=>{
     //console.log(sendData[0])
     res.json( sendData[0] )
   }/*else{
-    res.redirect('/login')
+    res.redirect('http://jj.me:3000/login')
   }*/
 })
 /**/
@@ -65,20 +65,21 @@ app.post('/login', cors(corsOptions),async ( req,res )=>{
   
   const dadosDB = await mysql('list',login,'email')
 
-    const passwd = await bcrypt.compare( password, dadosDB[0].password )
+  const passwd = await bcrypt.compare( password, dadosDB[0].password )
 
-    if (dadosDB[0].email == login && passwd) {
-      cookie = dadosDB[0].id
-      res.set( 'Content-Type', 'text/html' )
-      res.send(`<script>window.location.href = 'http://jj.me:3000?key=${cookie}'</script>`)
+  if (dadosDB[0].email == login && passwd) {
+    cookie = dadosDB[0].id
+    res.set( 'Content-Type', 'text/html' )
+    res.send(`<script>window.location.href = 'http://jj.me:3000?key=${cookie}'</script>`)
   }
 })
 
+/*
 app.get('/login', cors(corsOptions),(req,res)=>{
   if (cookie.length == 32) {
     res.set( 'Content-Type', 'text/html' )
     res.send(`<script>window.location.href = 'http://jj.me:3000?key=${cookie}'</script>`)
-    /*let options = {
+    let options = {
       path:'',
       domain:'jj.me',
       httpOnly: true,
@@ -89,11 +90,12 @@ app.get('/login', cors(corsOptions),(req,res)=>{
     res.cookie('key',cookie[1],options)
     //res.status(200).json({msg:'You get in...'})
   }else{
-    res.json({'Error':'Bad auth...'})*/
+    res.json({'Error':'Bad auth...'})
   }
 })
+*/
 
-app.post('/sign', cors(corsOptions), async(req,res)=>{
+app.post('/sigin', cors(corsOptions), async(req,res)=>{
   //depois das validações
   const { login } = req.body
   const { password } = req.body
@@ -101,9 +103,6 @@ app.post('/sign', cors(corsOptions), async(req,res)=>{
   const { born } = req.body
   const { sex } = req.body
   const { country } = req.body
-
-  console.log(login,' : ',password,' : ',name,' : ',born,' : ',sex,' : ',country)
-
   const id = login+password
   const hashId = await md5.createHash('md5').update(id).digest('hex')
   const hashPasswd = await bcrypt.hash(password, 10)
@@ -111,8 +110,9 @@ app.post('/sign', cors(corsOptions), async(req,res)=>{
   await mysql('insert',{id:hashId,name:name,email:login,password:hashPasswd,born:born,sex:sex,country:country})
 
   res.set( 'Content-Type', 'text/html' )
-  res.send( `<script>window.location.href = 'http://jj.me:3000'</script>` )
+  res.send( `<script>window.location.href = 'http://jj.me:3000/login'</script>` )
 })
 
 //const id = '04ff27090f4978d7f32636422abfb4e9'
+//const id = '83454535f84c3a2fef0679d707a414be'
 app.listen(port, () => console.log(`running on port ${port}...`))

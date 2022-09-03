@@ -31,7 +31,7 @@ export default function ApiData() {
         let exp = date.toUTCString()
         document.cookie = `${url[1]}; expires=${exp};`
         window.location.href = 'http://jj.me:3000/'
-    }else if(!window.location.href.includes('?') && !document.cookie){
+    }else if(!window.location.href.includes('?') && !window.location.href.includes('sigin') && !document.cookie){
         return (
             <>
                 <Login/>

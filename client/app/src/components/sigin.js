@@ -8,9 +8,9 @@ export default function Sigin(){
                     <input type={'date'} name={'born'} placeholder={'born-date'}/>
                     <div>
                         <label for={'M'}>Male</label>
-                        <input type={'radio'} name={'sex'} id={'M'} required/>
+                        <input type={'radio'} name={'sex'} id={'M'} value={'M'} required/>
                         <label for={'F'}>Female</label>
-                        <input type={'radio'} name={'sex'} id={'F'} required/>
+                        <input type={'radio'} name={'sex'} id={'F'} value={'F'} required/>
                     </div>
                     <input type={'password'} name={'password'} placeholder={'password'} required/>
                     <label for={'country'}>Select you country:</label>
