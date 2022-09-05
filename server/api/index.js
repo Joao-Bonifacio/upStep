@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const cookieParser = require('cookie-parser')
+//const cookieParser = require('cookie-parser')
 const bcrypt = require('bcryptjs')
 const md5 = require('crypto')
 //const jwt = require('jsonwebtoken')
@@ -10,7 +10,7 @@ const app = express()
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
-app.use(cookieParser())
+//app.use(cookieParser())
 app.use(express.json())
 app.use(cors())
 var cookie = ''
