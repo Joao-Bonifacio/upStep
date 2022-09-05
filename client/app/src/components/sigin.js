@@ -1,4 +1,5 @@
-export default function Sigin(){
+export default function Sigin(props){
+    //console.log(props.children)
     while (!document.cookie) {
         return(
             <>
@@ -13,6 +14,7 @@ export default function Sigin(){
                         <input type={'radio'} name={'sex'} id={'F'} value={'F'} required/>
                     </div>
                     <input type={'password'} name={'password'} placeholder={'password'} required/>
+                    <input type={'password'} name={'cpassword'} placeholder={'confirm password'} required/>
                     <label for={'country'}>Select you country:</label>
                     <select name={'country'}>
                         <option>Brasil</option>
