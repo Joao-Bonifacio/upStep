@@ -17,6 +17,7 @@ var cookie = ''
 
 // set cors
 const corsOptions = {
+  //origin de acordo com o host do wsl2
   orign: ['http://localhost:3000','http://localhost:3000/login','http://jj.me:3000','http://jj.me:3000/login','http://jj.me:3000/sigin'],
   preflightContinue: true,
   credentials: true,
@@ -86,10 +87,13 @@ app.post('/sigin', cors(corsOptions), async(req,res)=>{
   const hashId = await md5.createHash('md5').update(id).digest('hex')
   const hashPasswd = await bcrypt.hash(password, 10)
 
-  await mysql('insert',{id:hashId,name:name,email:login,password:hashPasswd,born:born,sex:sex,country:country})
+  const { cpassword } = req.body
+  console.log(cpassword)
+  //await mysql('insert',{id:hashId,name:name,email:login,password:hashPasswd,born:born,sex:sex,country:country})
 
-  res.set( 'Content-Type','text/html' )
-  res.send( `<script>window.location.href = 'http://jj.me:3000/login'</script>` )
+  //res.set( 'Content-Type','text/html' )
+  //res.send( `<script>window.location.href = 'http://jj.me:3000/login'</script>` )
+  res.json({'msg':'ok'})
 })
 
 //const id = '04ff27090f4978d7f32636422abfb4e9'
