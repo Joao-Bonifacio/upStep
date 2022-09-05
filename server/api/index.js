@@ -88,7 +88,7 @@ app.post('/sigin', cors(corsOptions), async(req,res)=>{
 
   await mysql('insert',{id:hashId,name:name,email:login,password:hashPasswd,born:born,sex:sex,country:country})
 
-  res.set( 'Content-Type', 'text/html' )
+  res.set( 'Content-Type','text/html' )
   res.send( `<script>window.location.href = 'http://jj.me:3000/login'</script>` )
 })
 
