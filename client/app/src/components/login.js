@@ -7,6 +7,7 @@ export default function Login(){
                     <input type={'password'} name={'password'} placeholder={'password'} required/>
                     <input type={'submit'} value={'Submit'} /><span>or</span><a href={'http://jj.me:3000/sigin'}>Register</a>
                 </form>
+                
             </>
         )
     }
