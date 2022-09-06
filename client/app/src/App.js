@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from 'reactstrap'
+//import { Button } from 'reactstrap'
 import ApiData from './components/apiClient'
 import './App.css'
 
@@ -9,7 +9,6 @@ function App() {
     <>
       <main>
         <ApiData/>
-        <Button color="danger">Danger!</Button>
       </main>
     </>
     )
