@@ -79,21 +79,24 @@ app.post('/sigin', cors(corsOptions), async(req,res)=>{
   //depois das validações
   const { login } = req.body
   const { password } = req.body
+  const { cpassword } = req.body
   const { name } = req.body
   const { born } = req.body
   const { sex } = req.body
   const { country } = req.body
+
   const id = login+password
   const hashId = await md5.createHash('md5').update(id).digest('hex')
   const hashPasswd = await bcrypt.hash(password, 10)
 
-  const { cpassword } = req.body
-  console.log(cpassword)
-  //await mysql('insert',{id:hashId,name:name,email:login,password:hashPasswd,born:born,sex:sex,country:country})
-
-  //res.set( 'Content-Type','text/html' )
-  //res.send( `<script>window.location.href = 'http://jj.me:3000/login'</script>` )
-  res.json({'msg':'ok'})
+  if (password === cpassword) {
+    await mysql('insert',{id:hashId,name:name,email:login,password:hashPasswd,born:born,sex:sex,country:country})
+    res.set( 'Content-Type','text/html' )
+    res.send( `<script>window.location.href = 'http://jj.me:3000/login'</script>` )
+  }else{
+    res.set( 'Content-Type','text/html' )
+    res.send('<h1>Passwords not same<h1><script>setTimeout(()=>{window.location.href = "http://jj.me:3000/sigin"},2500)</script>')
+  }
 })
 
 //const id = '04ff27090f4978d7f32636422abfb4e9'
