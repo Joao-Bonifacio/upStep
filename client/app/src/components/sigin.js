@@ -5,7 +5,7 @@ export default function Sigin(props){
             <>
                 <form method={'POST'} action={'http://localhost:8080/sigin'} id={'form'}>
                     <input type={'name'} name={'name'} placeholder={'name'} required/>
-                    <input type={'email'} name={'login'} placeholder={'login'} required/>
+                    <input type={'email'} name={'login'} placeholder={'email'} required/>
                     <input type={'date'} name={'born'} placeholder={'born-date'}/>
                     <div>
                         <label htmlFor={'M'}>Male</label>
