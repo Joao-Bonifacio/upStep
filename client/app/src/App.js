@@ -10,6 +10,9 @@ function App() {
       <main>
         <ApiData/>
       </main>
+      <footer>
+
+      </footer>
     </>
     )
 }

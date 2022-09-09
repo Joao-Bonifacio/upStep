@@ -3,11 +3,22 @@ export default function Login(){
         return(
             <div className='container mt-3'>
                 <form method={'POST'} action={'http://localhost:8080/login'}>
-                    <input type={'email'} name={'login'} placeholder={'login'} required/>
-                    <input type={'password'} name={'password'} placeholder={'password'} required/>
-                    <input type={'submit'} value={'Submit'} /><span>or</span><a href={'http://jj.me:3000/sigin'}>Register</a>
-                </form>
-                
+                    <div className="mb-3">
+                        <label forhtml="email" className="form-label">Email address</label>
+                        <input type="email" className="form-control" id="email" name="login" required/>
+                        <div id="email" className="form-text">Input a valid email.</div>
+                    </div>
+                    <div className="mb-3">
+                        <label forhtml="password" className="form-label">Password</label>
+                        <input type="password" className="form-control" id="password" name="password" required/>
+                    </div>
+                    <div className="mb-3 form-check">
+                        <input type="checkbox" className="form-check-input" id="exampleCheck1" required/>
+                        <label className="form-check-label" forhtml="exampleCheck1">I promise that i will studdy a lot</label>
+                    </div>
+                    <button type="submit" className="btn btn-primary">Login</button>
+                    <span><a href="http://jj.me:3000/sigin">sigin</a></span>
+                </form>   
             </div>
         )
     }

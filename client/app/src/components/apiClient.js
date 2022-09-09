@@ -1,4 +1,5 @@
 import {React, useState, useEffect} from 'react'
+import Navbar from './Navbar'
 import Login from './login'
 import Sigin from './sigin'
 
@@ -21,7 +22,8 @@ export default function ApiData() {
     if (document.cookie) {
         return(
             <div>
-                {usr.name}
+                <Navbar/>
+                <container className="container-sm">{usr.name}</container>
             </div>
         )
     }else if(window.location.href.includes('?')){

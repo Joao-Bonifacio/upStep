@@ -63,6 +63,7 @@ app.get('/', cors(corsOptions),async ( req,res )=>{
 app.post('/login', cors(corsOptions),async ( req,res )=>{
   const { login } = req.body
   const { password } = req.body
+  console.log(login,password)
   
   const dadosDB = await mysql('list',login,'email')
 
@@ -72,6 +73,8 @@ app.post('/login', cors(corsOptions),async ( req,res )=>{
     cookie = dadosDB[0].id
     res.set( 'Content-Type', 'text/html' )
     res.send(`<script>window.location.href = 'http://jj.me:3000?key=${cookie}'</script>`)
+  }else{
+    res.redirect('http://jj.me:3000')
   }
 })
 
