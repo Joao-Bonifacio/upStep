@@ -1,8 +1,9 @@
 export default function Login(){
     while (!document.cookie) {
         return(
-            <div className='container mt-3'>
-                <form method={'POST'} action={'http://localhost:8080/login'}>
+            <div className='container-sm mt-5' style={{maxWidth: '400px',borderRadius: '8px',backgroundColor:'#CDCDCD'}}>
+                <form method={'POST'} action={'http://localhost:8080/login'} className="pt-4 pb-4">
+                    <h3 className="text-center">Login</h3>
                     <div className="mb-3">
                         <label forhtml="email" className="form-label">Email address</label>
                         <input type="email" className="form-control" id="email" name="login" required/>
@@ -16,8 +17,10 @@ export default function Login(){
                         <input type="checkbox" className="form-check-input" id="exampleCheck1" required/>
                         <label className="form-check-label" forhtml="exampleCheck1">I promise that i will studdy a lot</label>
                     </div>
-                    <button type="submit" className="btn btn-primary">Login</button>
-                    <span><a href="http://jj.me:3000/sigin">sigin</a></span>
+                    <div className="text-center">
+                        <button type="submit" className="btn btn-primary me-3">Login</button>
+                        <span className="ms-3"><a href="http://jj.me:3000/sigin">sigin</a></span>
+                    </div>
                 </form>   
             </div>
         )
