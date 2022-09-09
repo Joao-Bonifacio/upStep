@@ -1,7 +1,7 @@
 import {React, useState, useEffect} from 'react'
 import Navbar from './Navbar'
 import Login from './login'
-import Sigin from './sigin'
+import Signup from './Signup'
 
 export default function ApiData() {
     const [usr,setUsr] = useState([])
@@ -33,16 +33,16 @@ export default function ApiData() {
         let exp = date.toUTCString()
         document.cookie = `${url[1]}; expires=${exp};`
         window.location.href = 'http://jj.me:3000/'
-    }else if(!window.location.href.includes('?') && !window.location.href.includes('sigin') && !document.cookie){
+    }else if(!window.location.href.includes('?') && !window.location.href.includes('signup') && !document.cookie){
         return (
             <>
                 <Login/>
             </>
         )
-    }else if(window.location.href.includes('sigin')){
+    }else if(window.location.href.includes('signup')){
         return (
             <>
-                <Sigin/>
+                <Signup/>
             </>
         )
     }

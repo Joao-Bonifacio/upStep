@@ -14,12 +14,12 @@ export default function Login(){
                         <input type="password" className="form-control" id="password" name="password" required/>
                     </div>
                     <div className="mb-3 form-check">
-                        <input type="checkbox" className="form-check-input" id="exampleCheck1" required/>
-                        <label className="form-check-label" forhtml="exampleCheck1">I promise that i will studdy a lot</label>
+                        <input type="checkbox" className="form-check-input" id="check" required/>
+                        <label className="form-check-label" forhtml="check">I promise that i will studdy a lot</label>
                     </div>
                     <div className="text-center">
                         <button type="submit" className="btn btn-primary me-3">Login</button>
-                        <span className="ms-3"><a href="http://jj.me:3000/sigin">sigin</a></span>
+                        <span className="ms-3"><a href="http://jj.me:3000/signup">sigin</a></span>
                     </div>
                 </form>   
             </div>

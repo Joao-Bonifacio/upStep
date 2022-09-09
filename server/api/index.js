@@ -18,7 +18,7 @@ var cookie = ''
 // set cors
 const corsOptions = {
   //origin de acordo com o host do wsl2
-  orign: ['http://localhost:3000','http://localhost:3000/login','http://jj.me:3000','http://jj.me:3000/login','http://jj.me:3000/sigin'],
+  orign: ['http://localhost:3000','http://localhost:3000/login','http://jj.me:3000','http://jj.me:3000/login','http://jj.me:3000/signup'],
   preflightContinue: true,
   credentials: true,
   optionsSuccessStatus: 200
@@ -78,7 +78,7 @@ app.post('/login', cors(corsOptions),async ( req,res )=>{
   }
 })
 
-app.post('/sigin', cors(corsOptions), async(req,res)=>{
+app.post('/signup', cors(corsOptions), async(req,res)=>{
   //depois das validações
   const { login } = req.body
   const { password } = req.body
@@ -98,7 +98,7 @@ app.post('/sigin', cors(corsOptions), async(req,res)=>{
     res.send( `<script>window.location.href = 'http://jj.me:3000/login'</script>` )
   }else{
     res.set( 'Content-Type','text/html' )
-    res.send('<h1>Passwords not same<h1><script>setTimeout(()=>{window.location.href = "http://jj.me:3000/sigin"},2500)</script>')
+    res.send('<h1>Passwords not same<h1><script>setTimeout(()=>{window.location.href = "http://jj.me:3000/signup"},2500)</script>')
   }
 })
 
