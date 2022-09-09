@@ -1,5 +1,5 @@
 import Footer from "./Footer"
-export default function Signup(props){
+export default function Signup(){
     //console.log(props.children)
     while (!document.cookie) {
         return(
@@ -9,32 +9,37 @@ export default function Signup(props){
                 <form method={'POST'} action={'http://localhost:8080/signup'} className="pt-4 pb-4">
                     <h3 className="text-center">signup</h3>
 
-                    <div className="mb-3">
-                        <label forhtml="name" className="form-label">Full Name</label>
-                        <input type="name" className="form-control" id="name" name="name" required/>
-                    </div>
-
-                    <div className="mb-3">
-                        <label forhtml="email" className="form-label">Email address</label>
-                        <input type="email" className="form-control" id="email" name="login" required/>
-                        <div id="email" className="form-text">Input a valid email.</div>
-                    </div>
-
-                    <div class="input-group date" id="datepicker">
-                        <span class="input-group-text bg-light d-block">
-                            Born date: <input type="date" name="born" className="form-control"/>
-                        </span>
-                    </div>
-                    <div>
-                        <div className="form-text">What your sex?</div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="sex" id="M" value="M" checked/>
-                            <label class="form-check-label" for="M">Male</label>
+                   <div className="row">
+                        <div className="mb-3 col-6">
+                            <label forhtml="name" className="form-label">Full Name</label>
+                            <input type="name" className="form-control" id="name" name="name" required/>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="sex" id="F" value="F"/>
-                            <label class="form-check-label" for="F">Female</label>
+    
+                        <div className="mb-3 col-6">
+                            <label forhtml="email" className="form-label">Email address</label>
+                            <input type="email" className="form-control" id="email" name="login" required/>
                         </div>
+                   </div>
+
+                    <div className="row">
+                        <div className="col-6" id="datepicker">
+                            <span className="input-group-text bg-light d-block">
+                                Born date: <input type="date" name="born" className="form-control"/>
+                            </span>
+                        </div>
+
+                        <div className="col-6">
+                            <div className="form-check">
+                                <input className="form-check-input" type="radio" name="sex" id="M" value="M" defaultChecked/>
+                                <label className="form-check-label" htmlfor="M">Are you Male?</label>
+                            </div>
+                            <br/>
+                            <div className="form-check">
+                                <input className="form-check-input" type="radio" name="sex" id="F" value="F"/>
+                                <label className="form-check-label" htmlfor="F">Are you Female?</label>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div className="mb-3">
@@ -46,7 +51,7 @@ export default function Signup(props){
                         <input type="password" className="form-control" id="cpassword" name="cpassword" required/>
                     </div>
 
-                    <select class="form-select" aria-label="Default select" name="country">
+                    <select className="form-select" aria-label="Default select" name="country">
                         <option selected>Select your country</option>
                         <option value="Brasil">Brasil</option>
                         <option value="United States">United States</option>
