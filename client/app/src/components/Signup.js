@@ -5,7 +5,7 @@ export default function Signup(){
         return(
             <>
 
-            <div className='container-sm mt-5' style={{marginBottom:'90px',maxWidth: '500px',borderRadius: '8px',backgroundColor:'#CDCDCD'}}>
+            <div className='container-sm mt-5' style={{maxWidth: '500px',borderRadius: '8px',backgroundColor:'#CDCDCD'}}>
                 <form method={'POST'} action={'http://localhost:8080/signup'} className="pt-4 pb-4">
                     <h3 className="text-center">signup</h3>
 

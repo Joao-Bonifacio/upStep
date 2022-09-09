@@ -2,7 +2,7 @@ export default function Footer(){
     return(
         <>
         <div>
-            <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top site-footer" style={{position:'fixed',bottom:0,right:0,left:0,backgroundColor:'rgb(205, 205, 205)',zIndex:'-1'}}>
+            <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 border-top" style={{position:'fixed',bottom:0,right:0,left:0,backgroundColor:'rgb(205, 205, 205)',zIndex:'-1'}}>
                 <div className="col-md-4 d-flex align-items-center">
                 <a href="/" className="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
                     <svg src="/client/app/public/favicon.ico" className="bi" width="30" height="24"></svg>
