@@ -11,9 +11,9 @@ export default function Footer(){
                 </div>
             
                 <ul className="nav col-md-4 justify-content-end list-unstyled d-flex me-3">
-                    <li className="ms-3"><a className="text-muted" href="http://github.com"><i className="fa-brands fa-github"></i></a></li>
-                    <li className="ms-3"><a className="text-muted" href="http://linkedin.com"><i className="fa-brands fa-linkedin"></i></a></li>
-                    <li className="ms-3"><a className="text-muted" href="http://instagram.com"><i className="fa-brands fa-instagram"></i></a></li>
+                    <li className="ms-3"><a className="text-muted" href="https://github.com/Joao-Bonifacio"><i className="fa-brands fa-github"></i></a></li>
+                    <li className="ms-3"><a className="text-muted" href="https://www.linkedin.com/in/jo%C3%A3o-j%C3%BAnior-7499b6218/"><i className="fa-brands fa-linkedin"></i></a></li>
+                    <li className="ms-3"><a className="text-muted" href="https://www.instagram.com/jao_jj_/"><i className="fa-brands fa-instagram"></i></a></li>
                 </ul>
             </footer>
         </div>
