@@ -1,5 +1,5 @@
 import React from 'react'
-//import { Button } from 'reactstrap'
+import Footer from './components/Footer'
 import ApiData from './components/apiClient'
 import './App.css'
 
@@ -10,9 +10,7 @@ function App() {
       <main>
         <ApiData/>
       </main>
-      <footer>
-
-      </footer>
+      <Footer/>
     </>
     )
 }

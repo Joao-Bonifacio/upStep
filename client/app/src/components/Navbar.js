@@ -1,9 +1,9 @@
 export default function Navbar(){
     return(
         <>
-            <nav className="navbar navbar-expand-lg bg-secondary ">
+            <nav className="navbar navbar-expand-lg bg-primary ">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="http://jj.me:3000">Navbar</a>
+                    <a className="navbar-brand" href="/">upStep</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                     </button>

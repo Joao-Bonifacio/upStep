@@ -1,11 +1,20 @@
-import Footer from "./Footer"
 export default function Signup(){
-    //console.log(props.children)
+    const verifyPasswd = (e)=>{
+        e.preventDefault()
+        const password = document.querySelector('input[name=password]')
+        const cpassword = document.querySelector('input[name=cpassword]')
+        
+        if (cpassword.value === password.value) {
+            cpassword.setCustomValidate('')
+        }else{
+            cpassword.setCustomValidate('Not same')
+        }
+    }
     while (!document.cookie) {
         return(
             <>
 
-            <div className='container-sm mt-5' style={{maxWidth: '500px',borderRadius: '8px',backgroundColor:'#CDCDCD'}}>
+            <div className='container-sm mt-5 bg-white' style={{maxWidth: '500px',borderRadius: '8px'}}>
                 <form method={'POST'} action={'http://localhost:8080/signup'} className="pt-4 pb-4">
                     <h3 className="text-center">signup</h3>
 
@@ -45,11 +54,11 @@ export default function Signup(){
                     <div className="row">
                         <div className="mb-3 col-6">
                             <label forhtml="password" className="form-label">Password</label>
-                            <input type="password" className="form-control" id="password" name="password" required/>
+                            <input type="password" className="form-control" id="password" name="password" onChange={verifyPasswd} required/>
                         </div>
                         <div className="mb-3 col-6">
                             <label forhtml="cpassword" className="form-label">Confirm Password</label>
-                            <input type="password" className="form-control" id="cpassword" name="cpassword" required/>
+                            <input type="password" className="form-control" id="cpassword" name="cpassword" onChange={verifyPasswd} required/>
                         </div>
                     </div>
 
@@ -77,33 +86,7 @@ export default function Signup(){
                     </div>
                 </form>   
             </div>
-            <Footer/>
             </>
         )
     }
 }
-/*
-<form method={'POST'} action={'http://localhost:8080/signup'} id={'form'}>
-    <input type={'name'} name={'name'} placeholder={'name'} required/>
-    <input type={'email'} name={'login'} placeholder={'email'} required/>
-    <input type="date" name="born" placeholder="born-date"/>
-    <div>
-        <label htmlFor={'M'}>Male</label>
-        <input type={'radio'} name={'sex'} id={'M'} value={'M'} required/>
-        <label htmlFor={'F'}>Female</label>
-        <input type={'radio'} name={'sex'} id={'F'} value={'F'} required/>
-    </div>
-    <input type={'password'} name={'password'} placeholder={'password'} required/>
-    <input type={'password'} name={'cpassword'} placeholder={'confirm password'} required/>
-    <label htmlFor={'country'}>Select you country:</label>
-    <select name={'country'}>
-        <option>Brasil</option>
-        <option>United States</option>
-        <option>Canada</option>
-        <option>Japan</option>
-        <option>England</option>
-    </select>
-    <input type={'submit'} value={'Submit'} />
-</form>
-
-*/

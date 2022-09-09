@@ -21,10 +21,10 @@ export default function ApiData() {
     
     if (document.cookie) {
         return(
-            <div>
+            <>
                 <Navbar/>
-                <container className="container-sm">{usr.name}</container>
-            </div>
+                <div className="container mt-5">{usr.name}</div>
+            </>
         )
     }else if(window.location.href.includes('?')){
         let url = window.location.href.split('?')

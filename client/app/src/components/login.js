@@ -1,9 +1,8 @@
-import Footer from "./Footer"
 export default function Login(){
     while (!document.cookie) {
         return(
             <>
-                <div className='container-sm mt-5' style={{maxWidth: '400px',borderRadius: '8px',backgroundColor:'#CDCDCD'}}>
+                <div className='container-sm mt-5 bg-white' style={{maxWidth: '400px',borderRadius: '8px',backgroundColor:'#CDCDCD'}}>
                     <form method={'POST'} action={'http://localhost:8080/login'} className="pt-4 pb-4">
                         <h3 className="text-center">Login</h3>
                         <div className="mb-3">
@@ -20,7 +19,6 @@ export default function Login(){
                         </div>
                     </form>
                 </div>
-                <Footer/>
             </>
         )
     }
