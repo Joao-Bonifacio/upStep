@@ -63,10 +63,8 @@ app.get('/', cors(corsOptions),async ( req,res )=>{
 app.post('/login', cors(corsOptions),async ( req,res )=>{
   const { login } = req.body
   const { password } = req.body
-  console.log(login,password)
   
   const dadosDB = await mysql('list',login,'email')
-
   const passwd = await bcrypt.compare( password, dadosDB[0].password )
 
   if (dadosDB[0].email == login && passwd) {

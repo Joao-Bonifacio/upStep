@@ -3,9 +3,9 @@ export default function Footer(){
         <>
         <div>
             <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 border-top bg-white" style={{position:'fixed',bottom:0,right:0,left:0}}>
-                <div className="col-md-4 d-flex align-items-center">
+                <div className="col-md-4 d-flex align-items-center ps-3">
                 <a href="/" className="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                    <svg src="/client/app/public/favicon.ico" className="bi" width="30" height="24"></svg>
+                    <i class="fa-regular fa-user"></i>
                 </a>
                 <span className="mb-3 mb-md-0 text-muted">&copy; 2022 João Bonifácio</span>
                 </div>

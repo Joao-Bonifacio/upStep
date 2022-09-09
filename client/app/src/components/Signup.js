@@ -38,15 +38,15 @@ export default function Signup(){
                         </div>
 
                         <div className="col-6">
-                            <p className="form-check">
+                            <span className="form-check">
                                 <input className="form-check-input" type="radio" name="sex" id="M" value="M" defaultChecked/>
                                 <label className="form-check-label" htmlfor="M">Are you Male?</label>
-                            </p>
+                            </span>
                             <br/>
-                            <p className="form-check">
+                            <span className="form-check">
                                 <input className="form-check-input" type="radio" name="sex" id="F" value="F"/>
                                 <label className="form-check-label" htmlfor="F">Are you Female?</label>
-                            </p>
+                            </span>
                         </div>
 
                     </div>
