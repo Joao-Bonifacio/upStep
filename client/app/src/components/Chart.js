@@ -3,7 +3,7 @@ import ApexCharts from 'react-apexcharts'
 export default function Chart(){
     const options = {
         xaxis: {
-            type: 'number'
+            type: 'numeric'
         },
         yaxis:{
             tooltip: {
@@ -65,8 +65,24 @@ export default function Chart(){
                 strokeHeight: 5,
                 strokeColor: '#775DD0'
             }]
+        },
+        {
+            x: 'Análise metaforando',
+            y: 0,            
+            goals: [{
+                name: 'Expected',
+                value: 3,
+                strokeHeight: 5,
+                strokeColor: '#775DD0'
+            }]
         }]
     }]
+
+    //valores a serem setados por state
+    //console.log( series[0].data[0].x )
+    //console.log( series[0].data[0].y )
+    //console.log( series[0].data[0].goals[0].value )
+
     return(
         <ApexCharts
             options={options}
@@ -74,6 +90,8 @@ export default function Chart(){
             type="bar"
             //width={640}
             height={480}
+            className="bg-light p-3 mb-5"
+            style={{borderRadius:'8px'}}
         />
     )
 }
