@@ -100,6 +100,38 @@ app.post('/signup', cors(corsOptions), async(req,res)=>{
   }
 })
 
+//set charts
+
+app.get('/charts', cors(corsOptions),async ( req,res )=>{
+  if (req.headers.key) {
+    let ck = req.headers.key.split('=')
+
+    //const sendData = await mysql( 'list', ck[1], 'id' )
+    //sendData[0].email = undefined
+    //sendData[0].password = undefined
+
+    res.json( sendData[0] )
+  }else{
+    res.json({'Error':'Bad auth'})
+  }
+})
+
+app.post('/charts', ( req, res )=>{
+  if (req.headers.key) {
+    let ck = req.headers.key.split('=')
+    const db_chart = require('./db_charts')
+    db_chart.insert({key:''})
+
+    //const sendData = await mysql( 'list', ck[1], 'id' )
+    //sendData[0].email = undefined
+    //sendData[0].password = undefined
+
+    res.json( sendData[0] )
+  }else{
+    res.json({'Error':'Bad auth'})
+  }
+})
+
 //const id = '04ff27090f4978d7f32636422abfb4e9'
 //const id = '83454535f84c3a2fef0679d707a414be'
 app.listen(port, () => console.log(`running on port ${port}...`))
