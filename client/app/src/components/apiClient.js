@@ -1,4 +1,5 @@
 import {React, useState, useEffect} from 'react'
+import Chart from './Chart'
 import Navbar from './Navbar'
 import Login from './login'
 import Signup from './Signup'
@@ -24,6 +25,7 @@ export default function ApiData() {
             <>
                 <Navbar/>
                 <div className="container mt-5">{usr.name}</div>
+                <div className="container"><Chart/></div>
             </>
         )
     }else if(window.location.href.includes('?')){
