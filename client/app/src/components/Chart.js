@@ -22,39 +22,49 @@ export default function Chart(){
     const series = [{
         name: 'Actual',
         data: [{
-            x: 'con1',
-            y: 1,
-            goals: [
-                {
-                  name: 'Expected',
-                  value: 4,
-                  strokeHeight: 5,
-                  strokeColor: '#775DD0'
-                }
-              ]
+            //stage
+            x: 'Trade',
+            //stage
+            y: 6,
+            goals: [{
+                name: 'Expected',
+                //stage
+                value: 9,
+                strokeHeight: 5,
+                strokeColor: '#775DD0'
+            }]
         },
         {
-            x: 'con2',
-            y: 5,
-            goals: [
-                {
-                  name: 'Expected',
-                  value: 7,
-                  strokeHeight: 5,
-                  strokeColor: '#775DD0'
-                }
-              ]
+            //stage
+            x: 'Porogramação',
+            //stage
+            y: 4,
+            goals: [{
+                name: 'Expected',
+                value: 7,
+                strokeHeight: 5,
+                strokeColor: '#775DD0'
+            }]
         },
         {
-            x: 'con3',
-            y: 3,            goals: [
-                {
-                  name: 'Expected',
-                  value: 5,
-                  strokeHeight: 5,
-                  strokeColor: '#775DD0'
-                }
-              ]
+            x: 'Hack',
+            y: 4,            
+            goals: [{
+                name: 'Expected',
+                value: 7,
+                strokeHeight: 5,
+                strokeColor: '#775DD0'
+            }]
+        },
+        {
+            x: 'Idioma',
+            y: 6,            
+            goals: [{
+                name: 'Expected',
+                value: 8,
+                strokeHeight: 5,
+                strokeColor: '#775DD0'
+            }]
         }]
     }]
     return(
