@@ -18,6 +18,7 @@ export default function ApiData() {
         fetch('http://localhost:8080',{ headers: headers })
             .then(res => res.json())
             .then(res => setUsr(res))
+            .catch(err => console.log(err.message))
     },[])
     
     if (document.cookie) {

@@ -53,7 +53,6 @@ app.get('/', cors(corsOptions),async ( req,res )=>{
     sendData[0].email = undefined
     sendData[0].password = undefined
 
-    //console.log(sendData[0])
     res.json( sendData[0] )
   }else{
     res.json({'Error':'Bad auth'})
@@ -101,7 +100,6 @@ app.post('/signup', cors(corsOptions), async(req,res)=>{
 })
 
 //set charts
-
 app.get('/charts', cors(corsOptions),async ( req,res )=>{
   if (req.headers.key) {
     let ck = req.headers.key.split('=')
@@ -116,21 +114,42 @@ app.get('/charts', cors(corsOptions),async ( req,res )=>{
   }
 })
 
+//add charts data
 app.post('/charts', ( req, res )=>{
   if (req.headers.key) {
     let ck = req.headers.key.split('=')
     const db_chart = require('./db_charts')
-    db_chart.insert({key:''})
-
-    //const sendData = await mysql( 'list', ck[1], 'id' )
-    //sendData[0].email = undefined
-    //sendData[0].password = undefined
+    db_chart.add({key:''})
 
     res.json( sendData[0] )
   }else{
     res.json({'Error':'Bad auth'})
   }
 })
+
+//test------------
+const bar = {
+  bar:{
+    x: 'Porogramação',
+    y: 4,
+    goals: [{
+      name: 'Expected',
+      value: 7,
+      strokeHeight: 5,
+      strokeColor: '#775DD0'
+  }]
+  }
+}
+const line = {
+  line:{
+    x: 'Porogramação',
+    y: 3
+  }
+}
+const _id = '04ff27090f4978d7f32636422abfb4e9'
+const db_chart = require('./db_charts')
+db_chart.get(_id)
+//test------------
 
 //const id = '04ff27090f4978d7f32636422abfb4e9'
 //const id = '83454535f84c3a2fef0679d707a414be'
