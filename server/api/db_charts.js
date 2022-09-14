@@ -24,7 +24,7 @@ const add = async (id,bar,line)=>{
 
 //get chart
 const get = (id)=>{
-    const data = chart.find({id:id}).sort({id:1}).exec((err,data)=>{
+    const data = chart.find({id:id}).exec((err,data)=>{
         console.log(data[0].bar)
         //res.json(...)
     })
