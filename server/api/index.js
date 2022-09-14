@@ -146,7 +146,7 @@ const line = {
     y: 3
   }
 }
-const _id = '04ff27090f4978d7f32636422abfb4e9'
+const _id = '83454535f84c3a2fef0679d707a414be'
 const db_chart = require('./db_charts')
 db_chart.get(_id)
 //test------------
