@@ -45,12 +45,18 @@ const mysql = async ( f, data, field )=>{
 
 app.get('/', cors(corsOptions),async ( req,res )=>{
   if (req.headers.key) {
+    const db2 = require('./db_charts')
     let ck = req.headers.key.split('=')
     const sendData = await mysql( 'list', ck[1], 'id' )
     sendData[0].email = undefined
     sendData[0].password = undefined
 
-    res.json( sendData[0] )
+    db2.chart.find({id:ck[1]}).exec((err,data,next)=>{
+      if (err) next(err)
+      //res.json(data[0])
+      res.status(200).json( [sendData[0],data[0]] )
+    })
+    //res.json(sendData[0])
     
   }else{
     res.json({'Error':'Bad auth'})
@@ -99,15 +105,10 @@ app.post('/signup', cors(corsOptions), async(req,res)=>{
 
 //set charts
 app.get('/charts', cors(corsOptions),async ( req,res )=>{
+  console.log(req.headers.key)
   if (req.headers.key) {
-    const db2 = require('./db_charts')
     let ck = req.headers.key.split('=')
 
-    db2.chart.find({id:ck[1]}).exec((err,data)=>{
-      if (err) console.log(err.message)
-      console.log(data)
-      res.json(data[0])
-  })
 
   }else{
     res.json({'Error':'Bad auth'})
@@ -126,12 +127,6 @@ app.post('/charts', ( req, res )=>{
     res.json({'Error':'Bad auth'})
   }
 })
-
-//test------------
-//const db_chart = require('./db_charts')
-//const _id = '83454535f84c3a2fef0679d707a414be'
-//db_chart.get(_id)
-//test------------
 
 //const id = '04ff27090f4978d7f32636422abfb4e9'
 //const id = '83454535f84c3a2fef0679d707a414be'

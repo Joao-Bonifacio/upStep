@@ -5,8 +5,10 @@ import Login from './login'
 import Signup from './Signup'
 
 export default function ApiData() {
-    const [usr,setUsr] = useState([])
-
+    const [usr,setUsr] = useState([{},{
+        bar:[{x:0,y:0}],
+        line:[{x:0,y:0}]
+    }])
     useEffect(()=>{
         let headers = {
             'method': 'GET',
@@ -20,13 +22,14 @@ export default function ApiData() {
             .then(res => setUsr(res))
             .catch(err => console.log(err.message))
     },[])
+    console.log(usr[1].bar.bar)
     
     if (document.cookie) {
         return(
             <>
                 <Navbar/>
-                <div className="container mt-5">{usr.name}</div>
-                <div className="container"> <Chart/> </div>
+                <div className="container mt-5">{usr[0].name}</div>
+                <div className="container"> <Chart data={[usr[1].bar.bar]}/> </div>
             </>
         )
     }else if(window.location.href.includes('?')){
