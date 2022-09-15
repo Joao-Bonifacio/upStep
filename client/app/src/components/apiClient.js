@@ -22,7 +22,6 @@ export default function ApiData() {
             .then(res => setUsr(res))
             .catch(err => console.log(err.message))
     },[])
-    console.log(usr[1].bar)
     
     if (document.cookie) {
         return(

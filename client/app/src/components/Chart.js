@@ -30,8 +30,6 @@ export default function Chart(props){
         data: data
     }]
 
-    //console.log(data)
-
     return(
         <ApexCharts
             options={options}
@@ -44,56 +42,3 @@ export default function Chart(props){
         />
     )
 }
-
-/*
-        {
-            x: 'hermes road',
-            y: 2,
-            goals: [{
-                name: 'Expected',
-                value: 4,
-                strokeHeight: 5,
-                strokeColor: '#775DD0'
-            }]
-        },
-        {
-            x: 'Porogramação',
-            y: 4,
-            goals: [{
-                name: 'Expected',
-                value: 7,
-                strokeHeight: 5,
-                strokeColor: '#775DD0'
-            }]
-        },
-        {
-            x: 'Hack',
-            y: 4,            
-            goals: [{
-                name: 'Expected',
-                value: 7,
-                strokeHeight: 5,
-                strokeColor: '#775DD0'
-            }]
-        },
-        {
-            x: 'Idioma',
-            y: 6,            
-            goals: [{
-                name: 'Expected',
-                value: 8,
-                strokeHeight: 5,
-                strokeColor: '#775DD0'
-            }]
-        },
-        {
-            x: 'Análise metaforando',
-            y: 0,            
-            goals: [{
-                name: 'Expected',
-                value: 3,
-                strokeHeight: 5,
-                strokeColor: '#775DD0'
-            }]
-        }
-        */
