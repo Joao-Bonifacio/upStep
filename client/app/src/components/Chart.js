@@ -5,7 +5,7 @@ export default function Chart(props){
     const [data,setData] = useState([])
     setTimeout(() => {
         setData(props.data[0])
-    }, 3000)
+    }, 1000)
 
     const options = {
         xaxis: {
