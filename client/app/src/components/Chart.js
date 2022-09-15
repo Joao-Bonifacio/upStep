@@ -1,6 +1,12 @@
 import ApexCharts from 'react-apexcharts'
+import { React, useState } from 'react'
 
 export default function Chart(props){
+    const [data,setData] = useState([])
+    setTimeout(() => {
+        setData(props.data[0])
+    }, 3000)
+
     const options = {
         xaxis: {
             type: 'numeric'
@@ -21,7 +27,7 @@ export default function Chart(props){
     }
     const series = [{
         name: 'Actual',
-        data: props.data
+        data: data
     }]
 
     //console.log(data)
@@ -41,11 +47,11 @@ export default function Chart(props){
 
 /*
         {
-            x: 'Trade',
-            y: 6,
+            x: 'hermes road',
+            y: 2,
             goals: [{
                 name: 'Expected',
-                value: 9,
+                value: 4,
                 strokeHeight: 5,
                 strokeColor: '#775DD0'
             }]

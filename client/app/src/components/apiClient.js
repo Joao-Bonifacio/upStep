@@ -22,14 +22,14 @@ export default function ApiData() {
             .then(res => setUsr(res))
             .catch(err => console.log(err.message))
     },[])
-    console.log(usr[1].bar.bar)
+    console.log(usr[1].bar)
     
     if (document.cookie) {
         return(
             <>
                 <Navbar/>
                 <div className="container mt-5">{usr[0].name}</div>
-                <div className="container"> <Chart data={[usr[1].bar.bar]}/> </div>
+                <div className="container"> <Chart data={usr[1].bar} /> </div>
             </>
         )
     }else if(window.location.href.includes('?')){

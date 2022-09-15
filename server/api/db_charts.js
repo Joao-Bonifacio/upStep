@@ -9,8 +9,8 @@ db2.connect('mongodb+srv://jhow:jhow044@upstep.fkjjkmz.mongodb.net/?retryWrites=
 const Schema = db2.Schema
 const chartSchema = new Schema({
     _id:{ type: String },
-    bar:{ type: Object },
-    line:{ type: Object }
+    bar:{ type: Array },
+    line:{ type: Array }
 },{collection:'chart'})
 
 //set colection
@@ -19,7 +19,7 @@ const chart = db2.model('charts', chartSchema)
 //add chart
 
 const add = async (id,bar,line)=>{
-    await new chart({_id:id,bar:bar,line:line}).save()
+    await new chart({_id:id,bar:[bar],line:[line]}).save()
 }
 //add(id,bar,line)
 
