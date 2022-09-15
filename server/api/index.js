@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-//const cookieParser = require('cookie-parser')
+const db = require('./db')
 const bcrypt = require('bcryptjs')
 const md5 = require('crypto')
 //const jwt = require('jsonwebtoken')
@@ -10,7 +10,6 @@ const app = express()
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
-//app.use(cookieParser())
 app.use(express.json())
 app.use(cors())
 var cookie = ''
@@ -25,7 +24,6 @@ const corsOptions = {
 }
 // create the connection to database
 const mysql = async ( f, data, field )=>{
-  const db = require('./db')
   
   switch (f) {
     case 'insert':
@@ -48,12 +46,12 @@ const mysql = async ( f, data, field )=>{
 app.get('/', cors(corsOptions),async ( req,res )=>{
   if (req.headers.key) {
     let ck = req.headers.key.split('=')
-
     const sendData = await mysql( 'list', ck[1], 'id' )
     sendData[0].email = undefined
     sendData[0].password = undefined
 
     res.json( sendData[0] )
+    
   }else{
     res.json({'Error':'Bad auth'})
   }
@@ -102,13 +100,15 @@ app.post('/signup', cors(corsOptions), async(req,res)=>{
 //set charts
 app.get('/charts', cors(corsOptions),async ( req,res )=>{
   if (req.headers.key) {
+    const db2 = require('./db_charts')
     let ck = req.headers.key.split('=')
 
-    //const sendData = await mysql( 'list', ck[1], 'id' )
-    //sendData[0].email = undefined
-    //sendData[0].password = undefined
+    db2.chart.find({id:ck[1]}).exec((err,data)=>{
+      if (err) console.log(err.message)
+      console.log(data)
+      res.json(data[0])
+  })
 
-    res.json( sendData[0] )
   }else{
     res.json({'Error':'Bad auth'})
   }
@@ -128,27 +128,9 @@ app.post('/charts', ( req, res )=>{
 })
 
 //test------------
-const bar = {
-  bar:{
-    x: 'Porogramação',
-    y: 4,
-    goals: [{
-      name: 'Expected',
-      value: 7,
-      strokeHeight: 5,
-      strokeColor: '#775DD0'
-  }]
-  }
-}
-const line = {
-  line:{
-    x: 'Porogramação',
-    y: 3
-  }
-}
-const _id = '83454535f84c3a2fef0679d707a414be'
-const db_chart = require('./db_charts')
-db_chart.get(_id)
+//const db_chart = require('./db_charts')
+//const _id = '83454535f84c3a2fef0679d707a414be'
+//db_chart.get(_id)
 //test------------
 
 //const id = '04ff27090f4978d7f32636422abfb4e9'

@@ -17,10 +17,6 @@ export default function Chart(){
         .catch(err => console.log(err.message))
     },[])
 
-    //test-----------
-    console.log(data)
-    //test-----------
-
     const options = {
         xaxis: {
             type: 'numeric'
@@ -43,6 +39,8 @@ export default function Chart(){
         name: 'Actual',
         data: []
     }]
+
+    console.log(data)
 
     return(
         <ApexCharts
@@ -108,4 +106,4 @@ export default function Chart(){
                 strokeColor: '#775DD0'
             }]
         }
-*/
+        */

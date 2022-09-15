@@ -17,20 +17,23 @@ const chartSchema = new Schema({
 const chart = db2.model('charts', chartSchema)
 
 //add chart
+/*
 const add = async (id,bar,line)=>{
-    console.log(id,bar,line)
     await new chart({_id:id,bar:bar,line:line}).save()
-}
+}*/
 
 //get chart
-const get = (id)=>{
-    const data = chart.find({id:id}).exec((err,data)=>{
-        console.log(data[0].bar)
-        //res.json(...)
+/*
+const get = async (id)=>{
+    chart.find({id:id}).exec((err,data)=>{
+        if (err) console.log(err.message)
+        console.log(data)
+        return this.data
     })
-}
+    //return data
+}*/
 
 //update chart
 //...
 
-module.exports = { add, get }
+module.exports = { chart }

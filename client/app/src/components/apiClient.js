@@ -26,7 +26,7 @@ export default function ApiData() {
             <>
                 <Navbar/>
                 <div className="container mt-5">{usr.name}</div>
-                <div className="container"><Chart/></div>
+                <div className="container"> <Chart/> </div>
             </>
         )
     }else if(window.location.href.includes('?')){
