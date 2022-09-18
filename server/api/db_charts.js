@@ -37,4 +37,4 @@ const get = async (id)=>{
 //update chart
 //...
 
-module.exports = { chart }
+module.exports = { chart, add }
