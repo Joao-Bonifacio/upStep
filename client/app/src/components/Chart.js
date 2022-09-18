@@ -37,8 +37,6 @@ export default function Chart(props){
             type="bar"
             //width={640}
             height={480}
-            className="bg-light p-3 mb-5"
-            style={{borderRadius:'8px'}}
         />
     )
 }

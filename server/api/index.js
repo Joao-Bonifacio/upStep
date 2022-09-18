@@ -53,10 +53,10 @@ app.get('/', cors(corsOptions),async ( req,res )=>{
 
     db2.chart.find({id:ck[1]}).exec((err,data)=>{
       if (err) console.log(err.message)
-      if (data[0].bar != undefined){
+      if (data[0].bar != undefined){  
         res.status(200).json( [sendData[0],data[0]] )
       }else{
-        res.status(200).json( [sendData[0],{'error':'bad auth'}])
+        res.status(200).json( sendData[0] )
       }
     })
     //res.json(sendData[0])
