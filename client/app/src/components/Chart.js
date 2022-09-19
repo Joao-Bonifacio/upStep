@@ -14,24 +14,17 @@ export default function Chart(){
         let x = prompt('name: ')
         let y = Number(prompt('level: '))
         let expected = Number(prompt('expected: '))
-        //let time = Number(prompt('time wasted: '))
+
         template_bar.x = x
         template_bar.y = y
-        //template_line.x = x
-        //template_line.y = time
         template_bar.goals[0].value = expected
-        let preval = data
-    
-        preval.bar[0].push(template_bar)
-        //preval.line.push(template_line)
-        setData(preval)
-        console.log(data)
+
         let config = {
             headers: {
               key: document.cookie,
             }
           }
-        axios.post('http://localhost:8080/addcharts',{data:data},config)
+        axios.post('http://localhost:8080/addcharts',{data:template_bar},config)
         window.location.reload()
     }
 

@@ -26,7 +26,7 @@ export default function ApiData() {
         return(
             <>
                 <Navbar/>
-                <div className="container mt-5">{usr.name}</div>
+                <div className="container mt-5 text-center">Welcome: {usr.name}</div>
                 <Chart/>
             </>
         )

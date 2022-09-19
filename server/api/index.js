@@ -110,10 +110,8 @@ app.post('/addcharts', cors(corsOptions), async (req,res)=>{
   if (req.headers.key) {
     const db2 = require('./db_charts')
     let ck = req.headers.key.split('=')
-    console.log(req.body.data)
-    //const data = await db2.chart.findById(ck[1])
-    //data.bar.push(req.body.data)
-    const update = await db2.chart.findByIdAndUpdate( ck[1], req.body.data )
+
+    await db2.chart.findByIdAndUpdate( ck[1], req.body.data )
     res.json({'status':'ok'})
   }
 })
