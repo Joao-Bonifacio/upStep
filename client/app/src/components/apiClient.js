@@ -33,10 +33,15 @@ export default function ApiData() {
         template_bar.x = x
         template_bar.y = y
         template_bar.goals[0].value = expected
+        let preval = usr
 
-        console.log(template_bar)
-        setUsr([usr[0],...template_bar])
+        preval[1].bar[0].push(template_bar)
+        setUsr(preval)
         console.log(usr)
+
+        let chart = document.getElementById('frameChart')
+        console.log(chart)
+        //setAttribute('data',usr[1].bar)
     }
     
     if (document.cookie) {
@@ -53,7 +58,7 @@ export default function ApiData() {
                                 <span className='p-3'><i class="fa-solid fa-trash"></i></span> 
                             </div>
                         </div>
-                    <Chart data={usr[1].bar} />
+                    <Chart id={'frameChart'} data={usr[1].bar} />
                 </div>
             </>
         )

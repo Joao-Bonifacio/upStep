@@ -1,11 +1,12 @@
 import ApexCharts from 'react-apexcharts'
-import { React, useState } from 'react'
+//import { React, useState } from 'react'
 
 export default function Chart(props){
-    const [data,setData] = useState([])
-    setTimeout(() => {
-        setData(props.data[0])
-    }, 1000)
+    //const [data,setData] = useState([])
+    //setTimeout(() => {
+        //setData(props.data[0])
+        //console.log(props.data[0])
+    //}, 1000)
 
     const options = {
         xaxis: {
@@ -27,7 +28,7 @@ export default function Chart(props){
     }
     const series = [{
         name: 'Actual',
-        data: data
+        data: props.data[0]
     }]
 
     return(
