@@ -54,11 +54,8 @@ app.get('/', cors(corsOptions),async ( req,res )=>{
 
     //response---
     if (req.headers.scope === 'chart') {
-      db2.chart.find({id:ck[1]}).exec((err,data)=>{
-        if (err) console.log(err.message)
-        //chart values
-        res.status(200).json(data[0])
-      })
+      const data = await db2.chart.find({id:ck[1]})
+      res.json(data[0])
     }else{
       //usr values
       res.json(sendData[0])
@@ -108,6 +105,10 @@ app.post('/signup', cors(corsOptions), async(req,res)=>{
     res.set( 'Content-Type','text/html' )
     res.send('<h1>Passwords not same<h1><script>setTimeout(()=>{window.location.href = "http://jj.me:3000/signup"},2500)</script>')
   }
+})
+app.post('/charts', cors(corsOptions), (req,res)=>{
+  console.log(req.body.data)
+  res.json({'msg':'ok'})
 })
 
 //const id = '04ff27090f4978d7f32636422abfb4e9'

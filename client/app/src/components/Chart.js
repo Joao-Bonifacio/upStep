@@ -1,5 +1,6 @@
 import ApexCharts from 'react-apexcharts'
 import { React, useState, useEffect } from 'react'
+import axios from 'axios'
 
 export default function Chart(){
     let template_bar = {x:'nomme',y:5,goals: [{name: 'Expected', value:0, strokeHeight: 5, strokeColor: '#775DD0'}]}
@@ -17,9 +18,10 @@ export default function Chart(){
         template_bar.goals[0].value = expected
         let preval = data
     
-        preval.bar[0].push(template_bar)
+        preval.push(template_bar)
         setData(preval)
-        console.log(data.bar[0])
+        console.log(data)
+        axios.post('http://localhost:8080/charts',{data:data})
     }
 
     useEffect(()=>{
@@ -33,7 +35,7 @@ export default function Chart(){
         }
         fetch('http://localhost:8080',{ headers: headers })
             .then(res => res.json())
-            .then(res => setData(res))
+            .then(res => setData(res.bar[0]))
             .catch(err => console.log(err.message))
     },[])
 
@@ -57,7 +59,7 @@ export default function Chart(){
     }
     const series = [{
         name: 'Actual',
-        data: data.bar[0]
+        data: data
     }]
 
     return(

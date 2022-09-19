@@ -24,17 +24,13 @@ const add = async (id,bar,line)=>{
 //add(id,bar,line)
 
 //get chart
-/*
 const get = async (id)=>{
-    chart.find({id:id}).exec((err,data)=>{
-        if (err) console.log(err.message)
-        console.log(data)
-        return this.data
-    })
-    //return data
-}*/
+    if (err) console.log(err.message)
+    const data = await chart.find({id:id})
+    return data
+}
 
 //update chart
 //...
 
-module.exports = { chart, add }
+module.exports = { chart, add, get }
