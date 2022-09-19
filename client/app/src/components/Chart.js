@@ -3,7 +3,8 @@ import { React, useState, useEffect } from 'react'
 import axios from 'axios'
 
 export default function Chart(){
-    let template_bar = {x:'nomme',y:5,goals: [{name: 'Expected', value:0, strokeHeight: 5, strokeColor: '#775DD0'}]}
+    let template_bar = {x:'',y:5,goals: [{name: 'Expected', value:0, strokeHeight: 5, strokeColor: '#775DD0'}]}
+    //let template_line = {x:'',y:5}
     const [data,setData] = useState({
         bar:[{x:0,y:0,goals:[]}],
         line:[{x:0,y:0}]
@@ -11,17 +12,27 @@ export default function Chart(){
     const addChart = ()=>{
         //e.preventDefault()
         let x = prompt('name: ')
-        let y = Number(prompt('level'))
+        let y = Number(prompt('level: '))
         let expected = Number(prompt('expected: '))
+        //let time = Number(prompt('time wasted: '))
         template_bar.x = x
         template_bar.y = y
+        //template_line.x = x
+        //template_line.y = time
         template_bar.goals[0].value = expected
         let preval = data
     
-        preval.push(template_bar)
+        preval.bar[0].push(template_bar)
+        //preval.line.push(template_line)
         setData(preval)
         console.log(data)
-        axios.post('http://localhost:8080/charts',{data:data})
+        let config = {
+            headers: {
+              key: document.cookie,
+            }
+          }
+        axios.post('http://localhost:8080/addcharts',{data:data},config)
+        window.location.reload()
     }
 
     useEffect(()=>{
@@ -35,7 +46,7 @@ export default function Chart(){
         }
         fetch('http://localhost:8080',{ headers: headers })
             .then(res => res.json())
-            .then(res => setData(res.bar[0]))
+            .then(res => setData(res))
             .catch(err => console.log(err.message))
     },[])
 
@@ -59,7 +70,7 @@ export default function Chart(){
     }
     const series = [{
         name: 'Actual',
-        data: data
+        data: data.bar[0]
     }]
 
     return(
