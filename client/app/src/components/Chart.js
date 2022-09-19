@@ -4,13 +4,12 @@ import axios from 'axios'
 
 export default function Chart(){
     let template_bar = {x:'',y:5,goals: [{name: 'Expected', value:0, strokeHeight: 5, strokeColor: '#775DD0'}]}
-    //let template_line = {x:'',y:5}
+
     const [data,setData] = useState({
         bar:[{x:0,y:0,goals:[]}],
         line:[{x:0,y:0}]
     })
     const addChart = ()=>{
-        //e.preventDefault()
         let x = prompt('name: ')
         let y = Number(prompt('level: '))
         let expected = Number(prompt('expected: '))
@@ -19,12 +18,16 @@ export default function Chart(){
         template_bar.y = y
         template_bar.goals[0].value = expected
 
+        let preval = data
+        preval.bar[0].push(template_bar)
+        setData(preval)
+
         let config = {
             headers: {
               key: document.cookie,
             }
           }
-        axios.post('http://localhost:8080/addcharts',{data:template_bar},config)
+        axios.post('http://localhost:8080/addcharts',{data:data},config)
         window.location.reload()
     }
 
