@@ -50,20 +50,24 @@ app.get('/', cors(corsOptions),async ( req,res )=>{
     const sendData = await mysql( 'list', ck[1], 'id' )
     sendData[0].email = undefined
     sendData[0].password = undefined
-
-    db2.chart.find({id:ck[1]}).exec((err,data)=>{
-      if (err) console.log(err.message)
-      if (data[0].bar != undefined){  
-        res.status(200).json( [sendData[0],data[0]] )
-      }else{
-        res.status(200).json( sendData[0] )
-      }
-    })
-    //res.json(sendData[0])
     
+
+    //response---
+    if (req.headers.scope === 'chart') {
+      db2.chart.find({id:ck[1]}).exec((err,data)=>{
+        if (err) console.log(err.message)
+        //chart values
+        res.status(200).json(data[0])
+      })
+    }else{
+      //usr values
+      res.json(sendData[0])
+    }
   }else{
     res.json({'Error':'Bad auth'})
   }
+  //---response
+
 })
 
 app.post('/login', cors(corsOptions),async ( req,res )=>{
