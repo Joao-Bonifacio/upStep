@@ -69,14 +69,44 @@ export default function Chart(){
         data: data.bar[0]
     }]
 
+    console.log(data.bar[0])
     return(
         <div className="container bg-light p-3 mb-5" style={{borderRadius:'8px'}}>
             <div className='row text'>
                 <div className='col-6'>sef improvment</div>
                 <div className='col-6 text-right' style={{cursor:'pointer',right:0,textAlign:'right'}}>
-                    <span className='p-3' onClick={addChart}><i class="fa-solid fa-plus"></i></span>
-                    <span className='p-3'><i class="fa-solid fa-pen"></i></span>
-                    <span className='p-3'><i class="fa-solid fa-trash"></i></span>
+                    <span className='p-3' onClick={addChart}><i className="fa-solid fa-plus"></i></span>
+                    <span className='p-3'>
+                        <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <i className="fa-solid fa-pen"></i>
+                        </button>
+
+                        <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-dialog">
+                            <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel">Edit chart</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body">
+                                <ul className='list-group'>
+                                    {data.bar[0].map((e,i) => (
+                                        <li id={e.name} className='list-group-item'>
+                                            name:{e.x}-level:{e.y}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" className="btn btn-primary">Save changes</button>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </span>
+                    <span className='p-3'><i className="fa-solid fa-trash"></i>
+                </span>
                 </div>
             </div>
             <ApexCharts
