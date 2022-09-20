@@ -6,7 +6,7 @@ export default function Chart(){
     let template_bar = {x:'',y:5,goals: [{name: 'Expected', value:0, strokeHeight: 5, strokeColor: '#775DD0'}]}
 
     const [data,setData] = useState({
-        bar:[{x:0,y:0,goals:[]}],
+        bar:[[{x:0,y:0,goals:[]}]],
         line:[{x:0,y:0}]
     })
     const addChart = ()=>{
@@ -91,7 +91,7 @@ export default function Chart(){
                             <div className="modal-body">
                                 <ul className='list-group'>
                                     {data.bar[0].map((e,i) => (
-                                        <li id={e.name} className='list-group-item'>
+                                        <li id={i} className='list-group-item text-left'>
                                             name:{e.x}-level:{e.y}
                                         </li>
                                     ))}
