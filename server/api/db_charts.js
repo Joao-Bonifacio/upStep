@@ -19,7 +19,7 @@ const chart = db2.model('charts', chartSchema)
 //add chart
 
 const add = async (id,bar,line)=>{
-    await new chart({_id:id,bar:[bar],line:[line]}).save()
+    await new chart({_id:id,bar:bar,line:line}).save()
 }
 //add(id,bar,line)
 

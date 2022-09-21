@@ -17,7 +17,7 @@ var cookie = ''
 // set cors
 const corsOptions = {
   //origin de acordo com o host do wsl2
-  orign: ['http://localhost:3000','http://localhost:3000/login','http://jj.me:3000','http://jj.me:3000/login','http://jj.me:3000/signup'],
+  orign: ['http://localhost:3000','http://jj.me:3000'],
   preflightContinue: true,
   credentials: true,
   optionsSuccessStatus: 200
@@ -107,30 +107,35 @@ app.post('/signup', cors(corsOptions), async (req,res)=>{
   }
 })
 
+
 //posteriormente, setar uma rota apenas para os dois métodos => (add e drop)
 app.post('/addCharts', cors(corsOptions), async (req,res)=>{
-  if (req.headers.key /*&& req.headers.body.data.bar[0].x != null && req.headers.body[0].y != null*/) {
+  if (req.headers.key) {
     const db2 = require('./db_charts')
     let ck = req.headers.key.split('=')
 
-    await db2.chart.findByIdAndUpdate( ck[1], req.body.data )
+    if (!req.body.first) {
+      await db2.chart.findByIdAndUpdate( ck[1], req.body.data )
+    }else{
+      await db2.add( ck[1], req.body.data.bar, req.body.data.line )
+    }
     res.json({'status':'ok'})
   }else{
-    res.json({error:'cannot add chart'})
+    res.json({error:'cannot add chart-item'})
   }
 })
-app.post('/dropCharts', cors(corsOptions), /*async*/ (req,res)=>{
-  /*if (req.headers.key && req.headers.body.data.bar[0].x != null){
+app.post('/dropCharts', cors(corsOptions), async (req,res)=>{
+  if (req.headers.key){
     const db2 = require('./db_charts')
     let ck = req.headers.key.split('=')
 
-    await db2.chart.findByIdAndUpdate( ck[1], req.body.data )
+    await db2.chart.findByIdAndDelete( ck[1] )
+    await db2.add( ck[1], req.body.data.bar, req.body.data.line )
+    //await db2.chart.findByIdAndUpdate( ck[1], req.body.data )
     res.json({'status':'ok'})
   }else{
-    res.json({error:'cannot add chart'})
-  }*/
-  console.log(req.body.data)
-  res.json({'msg':'msg'})
+    res.json({error:'cannot drop chart-item'})
+  }
 })
 
 //const id = '04ff27090f4978d7f32636422abfb4e9'

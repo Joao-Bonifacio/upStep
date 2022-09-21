@@ -3,13 +3,16 @@ import { React, useState, useEffect } from 'react'
 import axios from 'axios'
 
 export default function Chart(){
-    let template_bar = {x:'',y:5,goals: [{name: 'Expected', value:0, strokeHeight: 5, strokeColor: '#775DD0'}]}
+    var template_bar = {x:'',y:0,goals: [{name: 'Expected', value:0, strokeHeight: 5, strokeColor: '#775DD0'}]}
 
     const [data,setData] = useState({
-        bar:[[{x:'',y:0,goals:[{value:null}]}]],
-        line:[{x:0,y:0}]
+        bar:[{x:'Exemple',y:0,goals:[{value:0}]}],
+        line:[{x:'',y:0}]
     })
+    
     const addChart = ()=>{
+        //console.log(data)
+        //console.log(data.bar.length)
         let x = prompt('name: ')
         let y = Number(prompt('level: '))
         let expected = Number(prompt('expected: '))
@@ -17,40 +20,58 @@ export default function Chart(){
         template_bar.x = x
         template_bar.y = y
         template_bar.goals[0].value = expected
+        console.log('template_bar_',template_bar)
 
-        let preval = data
-        preval.bar[0].push(template_bar)
-        setData(preval)
-
-        let config = {
-            headers: {
-              key: document.cookie,
-              set: 'add'
-            }
-          }
-        if(x != null && y != null){
-            axios.post('http://localhost:8080/addCharts',{data:data},config)
-        }
-    }
-    const dropChart = ()=>{
-        let x = prompt('name: ')
-        let preval = data
-        if (x != null) {
-            for (let i = 0; i < preval.bar[0].length; i++) {
-                if (preval.bar[0][i].x === x) {
-                    preval.bar[0][i] = undefined
-                    let config = {
-                        headers: {
-                          key: document.cookie,
-                          set: 'add'
-                        }
-                      }
-                    if(x != null){
-                        setData(preval)
-                        axios.post('http://localhost:8080/dropCharts',{data:data},config)
+        if(x != null && y != null && data){
+            if (data.bar.length > 1) {
+                let preval = data
+                preval.bar.push(template_bar)
+                setData(template_bar)
+                let config = {
+                    headers: {
+                    key: document.cookie,
                     }
                 }
+                axios.post('http://localhost:8080/addCharts',{data:preval},config)
+            }else{
+                let preval = {
+                    bar:[template_bar],
+                    line:[{x:x,y:0}]
+                }
+                setData(preval)
+                let config = {
+                    headers: {
+                    key: document.cookie,
+                    }
+                }
+                //console.log(preval)
+                axios.post('http://localhost:8080/addCharts',{data:preval,first:true},config)
+                .then(res => console.log('sucsess: ',res))
+                .catch(err => console.log('failed: ',err))
             }
+        }
+    }
+    const dropChart = async ()=>{
+        let x = String(prompt('name: '))
+        let preval = data
+        if (x != null) {
+            console.log('on f-if')
+            for (let i = 0; i < preval.bar.length; i++) {
+                console.log(preval.bar[i])
+                if (preval.bar[i].x === x) {
+                    console.log('in s-if')
+                    console.log(preval.bar)
+                    preval.bar[i] = undefined
+                    //setData(preval)
+                }
+            }
+            let config = {
+                headers: {
+                    key: document.cookie,
+                    //set: 'drop'
+                }
+            }
+            axios.post('http://localhost:8080/dropCharts',{data:preval},config)
         }
     }
 
@@ -65,7 +86,7 @@ export default function Chart(){
         }
         fetch('http://localhost:8080',{ headers: headers })
             .then(res => res.json())
-            .then(res => setData(res))
+            .then(res => {if (res){ setData(res) }})
             .catch(err => console.log(err.message))
     },[])
 
@@ -89,7 +110,7 @@ export default function Chart(){
     }
     const series = [{
         name: 'Actual',
-        data: data.bar[0]
+        data: data.bar
     }]
         
     return(
@@ -113,7 +134,7 @@ export default function Chart(){
                         </div>
                         <div className="modal-body">
                             <ul className='list-group toolbar'>
-                                {data.bar[0].map((e,i) => ( 
+                                {data.bar.map((e,i) => ( 
                                     <li id={i} className='list-group-item'> 
                                         {e.x} - level:{e.y} - expected: {e.goals[0].value}
                                         <span id={`${i}-edit` }></span>
