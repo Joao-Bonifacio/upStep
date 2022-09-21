@@ -6,7 +6,7 @@ export default function Chart(){
     let template_bar = {x:'',y:5,goals: [{name: 'Expected', value:0, strokeHeight: 5, strokeColor: '#775DD0'}]}
 
     const [data,setData] = useState({
-        bar:[[{x:0,y:0,goals:[]}]],
+        bar:[[{x:0,y:0,goals:[{value:0}]}]],
         line:[{x:0,y:0}]
     })
     const addChart = ()=>{
@@ -68,54 +68,60 @@ export default function Chart(){
         name: 'Actual',
         data: data.bar[0]
     }]
-
-    console.log(data.bar[0])
+        
     return(
-        <div className="container bg-light p-3 mb-5" style={{borderRadius:'8px'}}>
-            <div className='row text'>
-                <div className='col-6'>sef improvment</div>
-                <div className='col-6 text-right' style={{cursor:'pointer',right:0,textAlign:'right'}}>
-                    <span className='p-3' onClick={addChart}><i className="fa-solid fa-plus"></i></span>
-                    <span className='p-3'>
-                        <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <i className="fa-solid fa-pen"></i>
-                        </button>
+    <div className="container bg-light p-3 mb-5" style={{borderRadius:'8px'}}>
+        <div className='row text'>
+            <div className='col-6'>sef improvment</div>
+            <div className='col-6' style={{cursor:'pointer',right:0,textAlign:'right'}}>
+                <span className='p-3' onClick={addChart}><i className="fa-solid fa-plus"></i></span>
+                <span className='p-3'>
+                    <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i className="fa-solid fa-pen"></i>
+                    </button>
 
-                        <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div className="modal-dialog">
-                            <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title" id="exampleModalLabel">Edit chart</h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div className="modal-body">
-                                <ul className='list-group'>
-                                    {data.bar[0].map((e,i) => (
-                                        <li id={i} className='list-group-item text-left'>
-                                            name:{e.x}-level:{e.y}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" className="btn btn-primary">Save changes</button>
-                            </div>
-                            </div>
+                    <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Edit chart</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <ul className='list-group toolbar'>
+                                {data.bar[0].map((e,i) => ( 
+                                    <li id={i} className='list-group-item'> 
+                                        {e.x} - level:{e.y} - expected: {
+                                            e.goals[0].value
+                                        }
+                                        <span id={`${i}-edit` }> --oi</span>
+                                    </li>
+                                    
+                                ))}
+                            </ul>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary">Save changes</button>
                         </div>
                         </div>
-                    </span>
-                    <span className='p-3'><i className="fa-solid fa-trash"></i>
+                    </div>
+                    </div>
                 </span>
-                </div>
+                <span className='p-3'><i className="fa-solid fa-trash"></i>
+            </span>
             </div>
-            <ApexCharts
-                options={options}
-                series={series}
-                type="bar"
-                //width={640}
-                height={480}
-            />
         </div>
+        <ApexCharts
+            options={options}
+            series={series}
+            type="bar"
+            //width={640}
+            height={480}
+        />
+    </div>
     )
+    
 }
+//caractere invisível
+//‎
