@@ -33,6 +33,7 @@ export default function Chart(){
                     }
                 }
                 axios.post('http://localhost:8080/addCharts',{data:preval},config)
+                window.location.reload()
             }else{
                 let preval = {
                     bar:[template_bar],
@@ -46,8 +47,7 @@ export default function Chart(){
                 }
                 //console.log(preval)
                 axios.post('http://localhost:8080/addCharts',{data:preval,first:true},config)
-                .then(res => console.log('sucsess: ',res))
-                .catch(err => console.log('failed: ',err))
+                window.location.reload()
             }
         }
     }
@@ -141,17 +141,18 @@ export default function Chart(){
                                     </li>
                                 ))}
                             </ul>
-                                <button type="button" className="btn p-3" onClick={addChart}>
-                                    <i className="fa-solid fa-plus"></i>
-                                </button>
 
-                                <button type="button" className="btn p-3" onClick={dropChart}>
-                                    <i className="fa-solid fa-trash"></i>
+                                <button type="button" className="btn p-3" >
+                                    
                                 </button>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" onClick={(e)=>{e.preventDefault();window.location.reload()}}>Save changes</button>
+                            <button type="button" className="btn btn-primary" onClick={addChart}>
+                                <i className="fa-solid fa-plus"></i>
+                            </button>
+                            <button type="button" className="btn btn-secondary" onClick={dropChart}>
+                                <i className="fa-solid fa-trash"></i>
+                            </button>
                         </div>
                         </div>
                     </div>
