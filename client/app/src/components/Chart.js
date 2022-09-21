@@ -23,7 +23,7 @@ export default function Chart(){
         console.log('template_bar_',template_bar)
 
         if(x != null && y != null && data){
-            if (data.bar.length > 1) {
+            if (data.bar[0].x !== 'Exemple') {
                 let preval = data
                 preval.bar.push(template_bar)
                 setData(template_bar)
@@ -61,17 +61,17 @@ export default function Chart(){
                 if (preval.bar[i].x === x) {
                     console.log('in s-if')
                     console.log(preval.bar)
-                    preval.bar[i] = undefined
+                    preval.bar.splice(i)
                     //setData(preval)
+                    let config = {
+                        headers: {
+                            key: document.cookie,
+                            //set: 'drop'
+                        }
+                    }
+                    axios.post('http://localhost:8080/dropCharts',{data:preval},config)
                 }
             }
-            let config = {
-                headers: {
-                    key: document.cookie,
-                    //set: 'drop'
-                }
-            }
-            axios.post('http://localhost:8080/dropCharts',{data:preval},config)
         }
     }
 
@@ -141,18 +141,17 @@ export default function Chart(){
                                     </li>
                                 ))}
                             </ul>
+                                <button type="button" className="btn p-3" onClick={addChart}>
+                                    <i className="fa-solid fa-plus"></i>
+                                </button>
 
-                                <button type="button" className="btn p-3" >
-                                    
+                                <button type="button" className="btn p-3" onClick={dropChart}>
+                                    <i className="fa-solid fa-trash"></i>
                                 </button>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-primary" onClick={addChart}>
-                                <i className="fa-solid fa-plus"></i>
-                            </button>
-                            <button type="button" className="btn btn-secondary" onClick={dropChart}>
-                                <i className="fa-solid fa-trash"></i>
-                            </button>
+                            <button type="button" className="btn btn-secondary">Close</button>
+                            <button type="button" className="btn btn-primary" onClick={(e)=>{e.preventDefault();window.location.reload()}}>Save changes</button>
                         </div>
                         </div>
                     </div>
