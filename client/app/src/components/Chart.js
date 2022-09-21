@@ -70,6 +70,7 @@ export default function Chart(){
                         }
                     }
                     axios.post('http://localhost:8080/dropCharts',{data:preval},config)
+                    window.location.reload()
                 }
             }
         }
@@ -151,7 +152,7 @@ export default function Chart(){
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary">Close</button>
-                            <button type="button" className="btn btn-primary" onClick={(e)=>{e.preventDefault();window.location.reload()}}>Save changes</button>
+                            <button type="button" className="btn btn-primary">Save changes</button>
                         </div>
                         </div>
                     </div>
