@@ -6,7 +6,7 @@ export default function Chart(){
     let template_bar = {x:'',y:5,goals: [{name: 'Expected', value:0, strokeHeight: 5, strokeColor: '#775DD0'}]}
 
     const [data,setData] = useState({
-        bar:[[{x:'',y:0,goals:[{value:0}]}]],
+        bar:[[{x:'',y:0,goals:[{value:null}]}]],
         line:[{x:0,y:0}]
     })
     const addChart = ()=>{
@@ -25,10 +25,33 @@ export default function Chart(){
         let config = {
             headers: {
               key: document.cookie,
+              set: 'add'
             }
           }
-        axios.post('http://localhost:8080/addcharts',{data:data},config)
-        window.location.reload()
+        if(x != null && y != null){
+            axios.post('http://localhost:8080/addCharts',{data:data},config)
+        }
+    }
+    const dropChart = ()=>{
+        let x = prompt('name: ')
+        let preval = data
+        if (x != null) {
+            for (let i = 0; i < preval.bar[0].length; i++) {
+                if (preval.bar[0][i].x === x) {
+                    preval.bar[0][i] = undefined
+                    let config = {
+                        headers: {
+                          key: document.cookie,
+                          set: 'add'
+                        }
+                      }
+                    if(x != null){
+                        setData(preval)
+                        axios.post('http://localhost:8080/dropCharts',{data:data},config)
+                    }
+                }
+            }
+        }
     }
 
     useEffect(()=>{
@@ -101,13 +124,13 @@ export default function Chart(){
                                     <i className="fa-solid fa-plus"></i>
                                 </button>
 
-                                <button type="button" className="btn p-3">
+                                <button type="button" className="btn p-3" onClick={dropChart}>
                                     <i className="fa-solid fa-trash"></i>
                                 </button>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Save changes</button>
+                            <button type="button" className="btn btn-primary" onClick={(e)=>{e.preventDefault();window.location.reload()}}>Save changes</button>
                         </div>
                         </div>
                     </div>

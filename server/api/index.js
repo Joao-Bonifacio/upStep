@@ -83,7 +83,7 @@ app.post('/login', cors(corsOptions),async ( req,res )=>{
   }
 })
 
-app.post('/signup', cors(corsOptions), async(req,res)=>{
+app.post('/signup', cors(corsOptions), async (req,res)=>{
   //depois das validações
   const { login } = req.body
   const { password } = req.body
@@ -106,14 +106,31 @@ app.post('/signup', cors(corsOptions), async(req,res)=>{
     res.send('<h1>Passwords not same<h1><script>setTimeout(()=>{window.location.href = "http://jj.me:3000/signup"},2500)</script>')
   }
 })
-app.post('/addcharts', cors(corsOptions), async (req,res)=>{
-  if (req.headers.key) {
+
+//posteriormente, setar uma rota apenas para os dois métodos => (add e drop)
+app.post('/addCharts', cors(corsOptions), async (req,res)=>{
+  if (req.headers.key /*&& req.headers.body.data.bar[0].x != null && req.headers.body[0].y != null*/) {
     const db2 = require('./db_charts')
     let ck = req.headers.key.split('=')
 
     await db2.chart.findByIdAndUpdate( ck[1], req.body.data )
     res.json({'status':'ok'})
+  }else{
+    res.json({error:'cannot add chart'})
   }
+})
+app.post('/dropCharts', cors(corsOptions), /*async*/ (req,res)=>{
+  /*if (req.headers.key && req.headers.body.data.bar[0].x != null){
+    const db2 = require('./db_charts')
+    let ck = req.headers.key.split('=')
+
+    await db2.chart.findByIdAndUpdate( ck[1], req.body.data )
+    res.json({'status':'ok'})
+  }else{
+    res.json({error:'cannot add chart'})
+  }*/
+  console.log(req.body.data)
+  res.json({'msg':'msg'})
 })
 
 //const id = '04ff27090f4978d7f32636422abfb4e9'
