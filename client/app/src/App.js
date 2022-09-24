@@ -10,7 +10,7 @@ function App() {
       <main>
         <ApiData/>
       </main>
-        <Footer/>
+        <Footer className='mt-5'/>
     </>
     )
 }

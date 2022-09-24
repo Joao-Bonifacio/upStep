@@ -2,17 +2,32 @@ import ApexCharts from 'react-apexcharts'
 import { React, useState, useEffect } from 'react'
 import axios from 'axios'
 
-export default function Chart(){
+export default function ChartBar(){
     var template_bar = {x:'',y:0,goals: [{name: 'Expected', value:0, strokeHeight: 5, strokeColor: '#775DD0'}]}
 
     const [data,setData] = useState({
         bar:[{x:'Exemple',y:0,goals:[{value:0}]}],
         line:[{x:'',y:0}]
     })
+
+    const getCharts = ()=>{
+        let headers = {
+            method: 'GET',
+            accept: 'application/json',
+            key: document.cookie,
+            redirect: 'follow',
+            origin: 'same-origin',
+            scope: 'chart'
+        }
+        fetch('http://localhost:8080',{ headers: headers })
+            .then(res => res.json())
+            .then(res => {if (res){ setData(res) }})
+            .catch(err => console.log(err.message))
+    }
+
+    useEffect(getCharts,[])
     
     const addChart = ()=>{
-        //console.log(data)
-        //console.log(data.bar.length)
         let x = prompt('name: ')
         let y = Number(prompt('level: '))
         let expected = Number(prompt('expected: '))
@@ -20,20 +35,19 @@ export default function Chart(){
         template_bar.x = x
         template_bar.y = y
         template_bar.goals[0].value = expected
-        console.log('template_bar_',template_bar)
 
         if(x != null && y != null && data){
             if (data.bar[0].x !== 'Exemple') {
                 let preval = data
                 preval.bar.push(template_bar)
-                setData(template_bar)
+                setData(preval)
                 let config = {
                     headers: {
                     key: document.cookie,
                     }
                 }
                 axios.post('http://localhost:8080/addCharts',{data:preval},config)
-                window.location.reload()
+                getCharts()
             }else{
                 let preval = {
                     bar:[template_bar],
@@ -45,9 +59,8 @@ export default function Chart(){
                     key: document.cookie,
                     }
                 }
-                //console.log(preval)
                 axios.post('http://localhost:8080/addCharts',{data:preval,first:true},config)
-                window.location.reload()
+                getCharts()
             }
         }
     }
@@ -62,34 +75,18 @@ export default function Chart(){
                     console.log('in s-if')
                     console.log(preval.bar)
                     preval.bar.splice(i)
-                    //setData(preval)
+                    setData(preval)
                     let config = {
                         headers: {
                             key: document.cookie,
-                            //set: 'drop'
                         }
                     }
                     axios.post('http://localhost:8080/dropCharts',{data:preval},config)
-                    window.location.reload()
+                    getCharts()
                 }
             }
         }
     }
-
-    useEffect(()=>{
-        let headers = {
-            method: 'GET',
-            accept: 'application/json',
-            key: document.cookie,
-            redirect: 'follow',
-            origin: 'same-origin',
-            scope: 'chart'
-        }
-        fetch('http://localhost:8080',{ headers: headers })
-            .then(res => res.json())
-            .then(res => {if (res){ setData(res) }})
-            .catch(err => console.log(err.message))
-    },[])
 
     const options = {
         xaxis: {
@@ -117,7 +114,7 @@ export default function Chart(){
     return(
     <div className="container bg-light p-3 mb-5" style={{borderRadius:'8px'}}>
         <div className='row text'>
-            <div className='col-6'>sef improvment</div>
+            <div className='col-6'>chain🔗</div>
 
             <div className='col-6' style={{cursor:'pointer',right:0,textAlign:'right'}}>
 
