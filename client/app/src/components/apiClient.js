@@ -1,6 +1,7 @@
 import {React, useState, useEffect} from 'react'
 import ChartBar from './ChartBar'
 import ChartPie from './ChartPie'
+import Road from './Road'
 import Navbar from './Navbar'
 import Login from './login'
 import Signup from './Signup'
@@ -30,6 +31,10 @@ export default function ApiData() {
                 <div className="container mt-5 mb-2 p-2 text-center bg-white" style={{borderRadius:'8px'}}>Welcome: {usr.name}</div>
                 <ChartBar/>
                 <ChartPie/>
+                <Road/>
+                <br/>
+                <br/>
+                <br/>
             </>
         )
     }else if(window.location.href.includes('?')){

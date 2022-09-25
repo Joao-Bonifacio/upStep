@@ -111,7 +111,7 @@ export default function ChartBar(){
     }]
         
     return(
-    <div className="container bg-light p-3 mb-5" style={{borderRadius:'8px'}}>
+    <div className="container bg-light p-3 mb-2" style={{borderRadius:'8px'}}>
         <div className='row text'>
             <div className='col-6'>chain🔗</div>
 
