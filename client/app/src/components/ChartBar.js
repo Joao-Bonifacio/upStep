@@ -6,8 +6,7 @@ export default function ChartBar(){
     var template_bar = {x:'',y:0,goals: [{name: 'Expected', value:0, strokeHeight: 5, strokeColor: '#775DD0'}]}
 
     const [data,setData] = useState({
-        bar:[{x:'Exemple',y:0,goals:[{value:0}]}],
-        line:[{x:'',y:0}]
+        bar:[{x:'Exemple',y:0,goals:[{value:0}]}]
     })
 
     const getCharts = ()=>{
@@ -17,7 +16,7 @@ export default function ChartBar(){
             key: document.cookie,
             redirect: 'follow',
             origin: 'same-origin',
-            scope: 'chart'
+            scope: 'chartbar'
         }
         fetch('http://localhost:8080',{ headers: headers })
             .then(res => res.json())
@@ -173,7 +172,6 @@ export default function ChartBar(){
         />
     </div>
     )
-    
 }
 //caractere invisível
 //‎
