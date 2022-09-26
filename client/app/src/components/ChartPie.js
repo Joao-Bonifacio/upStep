@@ -11,9 +11,8 @@ export default function ChartPie(){
             {series:[2,3,3],labels:['2name1','2name2','2name3']}
         ]
     })
-    /*
-    //data.pie[i].labels
-    const getCharts = ()=>{
+    
+    const getPie = ()=>{
         let headers = {
             method: 'GET',
             accept: 'application/json',
@@ -22,73 +21,18 @@ export default function ChartPie(){
             origin: 'same-origin',
             scope: 'chartpie'
         }
-        fetch('http://localhost:8080',{ headers: headers })
+        fetch('http://localhost:8080/pie',{ headers: headers })
             .then(res => res.json())
             .then(res => {if (res){ setData(res) }})
             .catch(err => console.log(err.message))
     }
-    useEffect(getCharts,[])
-
-    const addChart = ()=>{
-        let x = prompt('name: ')
-        let y = Number(prompt('level: '))
-        let expected = Number(prompt('expected: '))
-
-        template_pie.x = x
-        template_pie.y = y
-        template_pie.goals[0].value = expected
-
-        if(x != null && y != null && data){
-            if (data.bar[0].x !== 'Exemple') {
-                let preval = data
-                preval.bar.push(template_pie)
-                setData(preval)
-                let config = {
-                    headers: {
-                    key: document.cookie,
-                    }
-                }
-                axios.post('http://localhost:8080/addCharts',{data:preval},config)
-                getCharts()
-            }else{
-                let preval = {
-                    bar:[template_pie],
-                    line:[{x:x,y:0}]
-                }
-                setData(preval)
-                let config = {
-                    headers: {
-                    key: document.cookie,
-                    }
-                }
-                axios.post('http://localhost:8080/addCharts',{data:preval,first:true},config)
-                getCharts()
-            }
-        }
+    useEffect(getPie,[])
+    
+    const addPie = ()=>{
+       console.log('adicionar gráfico')
     }
-    const dropChart = async ()=>{
-        let x = String(prompt('name: '))
-        let preval = data
-        if (x != null) {
-            for (let i = 0; i < preval.bar.length; i++) {
-                if (preval.bar[i].x === x) {
-                    preval.bar.splice(i)
-                    setData(preval)
-                    let config = {
-                        headers: {
-                            key: document.cookie,
-                        }
-                    }
-                    axios.post('http://localhost:8080/dropCharts',{data:preval},config)
-                    getCharts()
-                }
-            }
-        }
-    }*/
-
-    //const series = [1,5,7]
-    const options = {
-        labels: ['name1','name2','name3']//data.pie.names,
+    const dropPie = async ()=>{
+        console.log('remover gráfico')
     }
 
     return(
@@ -97,9 +41,39 @@ export default function ChartPie(){
             <div className='row'>
                 <div className='col-10 container'>soldier⏳</div>
                 <div className="col-2" style={{textAlign:'right'}}>
-                    <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <span>
+                    <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#pieModal">
                         <i className="fa-solid fa-pen"></i>
                     </button>
+
+                    <div className="modal fade" id="pieModal" tabIndex="-1" aria-labelledby="pieModalLabel" aria-hidden="true">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="pieModalLabel">Edit time</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <ul className='list-group toolbar'>
+                                {}
+                            </ul>
+                                <button type="button" className="btn p-3" onClick={addPie}>
+                                    <i className="fa-solid fa-plus"></i>
+                                </button>
+
+                                <button type="button" className="btn p-3" onClick={dropPie}>
+                                    <i className="fa-solid fa-trash"></i>
+                                </button>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary">Close</button>
+                            <button type="button" className="btn btn-primary" 
+                            onClick={(e)=> {e.preventDefault();window.location.reload()}}>Save changes</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </span>
                     <button type="button" className="btn">
                         <i class="fa-solid fa-circle-info"></i>
                     </button>

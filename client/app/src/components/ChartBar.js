@@ -46,7 +46,8 @@ export default function ChartBar(){
                     }
                 }
                 axios.post('http://localhost:8080/addCharts',{data:preval},config)
-                getCharts()
+                //getCharts()
+                window.location.reload()
             }else{
                 let preval = {
                     bar:[template_bar],
@@ -59,7 +60,8 @@ export default function ChartBar(){
                     }
                 }
                 axios.post('http://localhost:8080/addCharts',{data:preval,first:true},config)
-                getCharts()
+                //getCharts()
+                window.location.reload()
             }
         }
     }
@@ -77,7 +79,8 @@ export default function ChartBar(){
                         }
                     }
                     axios.post('http://localhost:8080/dropCharts',{data:preval},config)
-                    getCharts()
+                    //getCharts()
+                    window.location.reload()
                 }
             }
         }
@@ -101,10 +104,6 @@ export default function ChartBar(){
             }
         }
     }
-    const series = [{
-        name: 'Actual',
-        data: data.bar
-    }]
         
     return(
     <div className="container bg-light p-3 mb-2" style={{borderRadius:'8px'}}>
@@ -144,7 +143,8 @@ export default function ChartBar(){
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary">Close</button>
-                            <button type="button" className="btn btn-primary">Save changes</button>
+                            <button type="button" className="btn btn-primary" 
+                            onClick={(e)=> {e.preventDefault();window.location.reload()}}>Save changes</button>
                         </div>
                         </div>
                     </div>
@@ -161,7 +161,7 @@ export default function ChartBar(){
         </div>
         <ApexCharts
             options={options}
-            series={series}
+            series={[{name:'Actual',data:data.bar}]}
             type="bar"
             //width={640}
             height={480}

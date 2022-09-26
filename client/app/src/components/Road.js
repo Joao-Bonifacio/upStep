@@ -21,7 +21,7 @@ export default function Road(){
             .catch(err => console.log(err.message))
     }
 
-    //useEffect(getCards,[])
+    useEffect(getCards,[])
     
     const addCard = ()=>{
         let priority = document.getElementById('priority').value
