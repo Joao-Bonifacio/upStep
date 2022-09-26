@@ -67,12 +67,8 @@ export default function ChartBar(){
         let x = String(prompt('name: '))
         let preval = data
         if (x != null) {
-            console.log('on f-if')
             for (let i = 0; i < preval.bar.length; i++) {
-                console.log(preval.bar[i])
                 if (preval.bar[i].x === x) {
-                    console.log('in s-if')
-                    console.log(preval.bar)
                     preval.bar.splice(i)
                     setData(preval)
                     let config = {

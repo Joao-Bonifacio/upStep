@@ -64,12 +64,8 @@ export default function ChartPie(){
         let x = String(prompt('name: '))
         let preval = data
         if (x != null) {
-            console.log('on f-if')
             for (let i = 0; i < preval.bar.length; i++) {
-                console.log(preval.bar[i])
                 if (preval.bar[i].x === x) {
-                    console.log('in s-if')
-                    console.log(preval.bar)
                     preval.bar.splice(i)
                     setData(preval)
                     let config = {
@@ -95,6 +91,9 @@ export default function ChartPie(){
             <div className='row'>
                 <div className='col-10 container'>soldier⏳</div>
                 <div className="col-2" style={{textAlign:'right'}}>
+                    <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i className="fa-solid fa-pen"></i>
+                    </button>
                     <button type="button" className="btn">
                         <i class="fa-solid fa-circle-info"></i>
                     </button>
