@@ -90,9 +90,16 @@ export default function ChartPie(){
     }
 
     return(
-        <div className='container bg-light p-3 row' style={{borderRadius:'8px',margin:'50px auto'}}>
+        <div className='container bg-light p-3' style={{borderRadius:'8px',margin:'50px auto'}}>
             
-            <div className='col-12'>soldier⏳</div>
+            <div className='row'>
+                <div className='col-10 container'>soldier⏳</div>
+                <div className="col-2" style={{textAlign:'right'}}>
+                    <button type="button" className="btn">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </button>
+                </div>
+            </div>
 
             <div className='container-sm row'>
                 <div className='col-4 p-3'>
@@ -101,8 +108,8 @@ export default function ChartPie(){
                             options={options}
                             series={series}
                             type="pie"
-                            height={600}
-                            width={380}
+                            //height={'100%'}
+                            width={'100%'}
                         />
                         <div>main</div>
                     </div>
@@ -114,8 +121,8 @@ export default function ChartPie(){
                             options={options}
                             series={series}
                             type="pie"
-                            height={600}
-                            width={380}
+                            //height={'100%'}
+                            width={'100%'}
                         />
                         <div>secondary</div>
                     </div>
@@ -127,8 +134,8 @@ export default function ChartPie(){
                             options={options}
                             series={series}
                             type="pie"
-                            height={600}
-                            width={380}
+                            //height={'100%'}
+                            width={'100%'}
                         />
                         <div>hobbies</div>
                     </div>

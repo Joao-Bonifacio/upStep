@@ -112,7 +112,7 @@ export default function ChartBar(){
         
     return(
     <div className="container bg-light p-3 mb-2" style={{borderRadius:'8px'}}>
-        <div className='row text'>
+        <div className='row'>
             <div className='col-6'>chain🔗</div>
 
             <div className='col-6' style={{cursor:'pointer',right:0,textAlign:'right'}}>
