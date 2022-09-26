@@ -21,7 +21,7 @@ export default function Road(){
             .catch(err => console.log(err.message))
     }
 
-    useEffect(getCards,[])
+    //useEffect(getCards,[])
     
     const addCard = ()=>{
         let priority = document.getElementById('priority').value
@@ -78,7 +78,7 @@ export default function Road(){
     return(
         <div className='container mb-2 bg-white' style={{borderRadius:'8px',padding:'2rem'}}>
 
-            <div className="row">
+            <div className="row con">
                 <div className="col-10">road🛣️</div>
                 <div className="col-2" style={{textAlign:'right'}}>
                     <button type="button" className="btn" onClick={dropCard}>
@@ -104,9 +104,13 @@ export default function Road(){
             <div className="card text-bg-primary mb-3 col-4 m-2" style={{maxWidth:'18rem'}}>
                 <div className="card-header">Add Card +</div>
                     <div className="card-body">
-                        <h5 className="card-title"><input type='text' placeholder='title' required/></h5>
+                        <h5 className="card-title">
+                            <input type='text' placeholder='title' size='13' required/>
+                        </h5>
                         <div className="row">
-                            <p className="card-text col-10 m-0"><textarea placeholder="description" required></textarea></p>
+                            <p className="card-text col-10 m-0">
+                                <textarea placeholder="description" required></textarea>
+                            </p>
                             <button type="button" className="btn p-3 col-2" onClick={addCard}>
                                     <i className="fa-solid fa-plus"></i>
                                 </button>

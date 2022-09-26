@@ -1,12 +1,18 @@
-//import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import ApexCharts from 'react-apexcharts'
 //import axios from 'axios'
 
 export default function ChartPie(){
-    /*var template_pie = {x:'',y:0,goals: [{name: 'Expected', value:0, strokeHeight: 5, strokeColor: '#775DD0'}]}
+    
     const [data,setData] = useState({
-        pie:[{series:[0],labels:['name']}]
+        pie:[
+            {series:[1,2,3],labels:['0name1','0name2','0name3']},
+            {series:[1,2,5],labels:['1name1','1name2','1name3']},
+            {series:[2,3,3],labels:['2name1','2name2','2name3']}
+        ]
     })
+    /*
+    //data.pie[i].labels
     const getCharts = ()=>{
         let headers = {
             method: 'GET',
@@ -80,9 +86,9 @@ export default function ChartPie(){
         }
     }*/
 
-    const series = [1,5,7]//data.line.values //array
+    //const series = [1,5,7]
     const options = {
-        labels: ['name1','name2','name3'],//data.pie.names,
+        labels: ['name1','name2','name3']//data.pie.names,
     }
 
     return(
@@ -104,8 +110,8 @@ export default function ChartPie(){
                 <div className='col-4 p-3'>
                     <div className='text-center'>
                         <ApexCharts
-                            options={options}
-                            series={series}
+                            options={{labels:data.pie[0].labels}}
+                            series={data.pie[0].series}
                             type="pie"
                             //height={'100%'}
                             width={'100%'}
@@ -117,8 +123,8 @@ export default function ChartPie(){
                 <div className='col-4 p-3'>
                     <div className='text-center'>
                         <ApexCharts
-                            options={options}
-                            series={series}
+                            options={{labels:data.pie[1].labels}}
+                            series={data.pie[1].series}
                             type="pie"
                             //height={'100%'}
                             width={'100%'}
@@ -130,8 +136,8 @@ export default function ChartPie(){
                 <div className='col-4 p-3'>
                     <div className='text-center'>
                         <ApexCharts
-                            options={options}
-                            series={series}
+                            options={{labels:data.pie[2].labels}}
+                            series={data.pie[2].series}
                             type="pie"
                             //height={'100%'}
                             width={'100%'}
