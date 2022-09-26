@@ -80,40 +80,37 @@ export default function ChartPie(){
                 </div>
             </div>
 
-            <div className='container-sm row'>
-                <div className='col-4 p-3'>
+            <div className='container-sm row text-center m-auto'>
+                <div className='col-4 p-3' style={{width:'400px'}}>
                     <div className='text-center'>
                         <ApexCharts
                             options={{labels:data.pie[0].labels}}
                             series={data.pie[0].series}
                             type="pie"
-                            //height={'100%'}
                             width={'100%'}
                         />
                         <div>main</div>
                     </div>
                 </div>
 
-                <div className='col-4 p-3'>
+                <div className='col-4 p-3' style={{width:'400px'}}>
                     <div className='text-center'>
                         <ApexCharts
                             options={{labels:data.pie[1].labels}}
                             series={data.pie[1].series}
                             type="pie"
-                            //height={'100%'}
                             width={'100%'}
                         />
                         <div>secondary</div>
                     </div>
                 </div>
 
-                <div className='col-4 p-3'>
+                <div className='col-4 p-3' style={{width:'400px'}}>
                     <div className='text-center'>
                         <ApexCharts
                             options={{labels:data.pie[2].labels}}
                             series={data.pie[2].series}
                             type="pie"
-                            //height={'100%'}
                             width={'100%'}
                         />
                         <div>hobbies</div>
