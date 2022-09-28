@@ -29,29 +29,78 @@ export default function ChartPie(){
     useEffect(getPie,[])
     
     const addPie = ()=>{
-       let set = String(prompt('Insert activity=valor: '))
+       let setLabel = String(prompt('Insert activity: '))
+       let setSerie = Number(prompt('How much time do you dedicate?: '))
        let scope = String(prompt('Insert where? (main/secondary/hobbies): '))
        let sendVal = data
-       let splitSet = set.split('=')
+       setSerie = Number(setSerie)
 
-       if (set !== null && scope !== null) {
-    
-       }
-
-       /*
-       let config = {
-            headers: {
-            key: document.cookie,
+       // eslint-disable-next-line use-isnan
+       if (setSerie!== null && setLabel !== null && scope !== null && typeof(setSerie) !== NaN) {
+        if (sendVal.pie[0].labels[0] !== '0name1') {
+            switch (scope) {
+                case 'main':
+                    sendVal.pie[0].labels.push(setLabel)
+                    sendVal.pie[0].series.push(setSerie)
+                    break;
+                case 'secondary':
+                    sendVal.pie[1].labels.push(setLabel)
+                    sendVal.pie[1].series.push(setSerie)
+                    break;
+                case 'hobbies':
+                    sendVal.pie[2].labels.push(setLabel)
+                    sendVal.pie[2].series.push(setSerie)
+                    break;
+                default:
+                    alert('failed to add activitys')
+            }
+        }else{
+            switch (scope) {
+                case 'main':
+                    sendVal.pie[0].labels = [setLabel]
+                    sendVal.pie[0].series = [setSerie]
+                    break;
+                case 'secondary':
+                    sendVal.pie[1].labels = [setLabel]
+                    sendVal.pie[1].series = [setSerie]
+                    break;
+                case 'hobbies':
+                    sendVal.pie[2].labels = [setLabel]
+                    sendVal.pie[2].series = [setSerie]
+                    break;
+                default:
+                    alert('failed to add activitys')
             }
         }
-        axios.post('http://localhost:8080/addCharts',{data:sendVal,first:true},config)
-        //getCharts()
+        setData(sendVal)
+        let config = {
+            headers: {
+                key: document.cookie,
+            }
+        }
+        axios.post('http://localhost:8080/addPies',{data:sendVal},config)
         window.location.reload()
-       
-       */
+       }
     }
     const dropPie = async ()=>{
-        console.log('remover gráfico')
+        let x = String(prompt('activity: '))
+        let sendVal = data
+        if (x != null) {
+            for (let i = 0; i < sendVal.bar.length; i++) {
+                if (sendVal.bar[i].x === x) {
+                    sendVal.bar.splice(i)
+                    setData(sendVal)
+                    let config = {
+                        headers: {
+                            key: document.cookie,
+                        }
+                    }
+                    axios.post('http://localhost:8080/dropCharts',{data:sendVal},config)
+                    //getCharts()
+                    window.location.reload()
+                }
+            }
+        }
     }
 
     return(
