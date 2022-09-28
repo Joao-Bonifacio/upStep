@@ -37,29 +37,29 @@ export default function ChartBar(){
 
         if(x != null && y != null && data){
             if (data.bar[0].x !== 'Exemple') {
-                let preval = data
-                preval.bar.push(template_bar)
-                setData(preval)
+                let sendVal = data
+                sendVal.bar.push(template_bar)
+                setData(sendVal)
                 let config = {
                     headers: {
                     key: document.cookie,
                     }
                 }
-                axios.post('http://localhost:8080/addCharts',{data:preval},config)
+                axios.post('http://localhost:8080/addCharts',{data:sendVal},config)
                 //getCharts()
                 window.location.reload()
             }else{
-                let preval = {
+                let sendVal = {
                     bar:[template_bar],
                     line:[{x:x,y:0}]
                 }
-                setData(preval)
+                setData(sendVal)
                 let config = {
                     headers: {
                     key: document.cookie,
                     }
                 }
-                axios.post('http://localhost:8080/addCharts',{data:preval,first:true},config)
+                axios.post('http://localhost:8080/addCharts',{data:sendVal,first:true},config)
                 //getCharts()
                 window.location.reload()
             }
@@ -67,18 +67,18 @@ export default function ChartBar(){
     }
     const dropChart = async ()=>{
         let x = String(prompt('name: '))
-        let preval = data
+        let sendVal = data
         if (x != null) {
-            for (let i = 0; i < preval.bar.length; i++) {
-                if (preval.bar[i].x === x) {
-                    preval.bar.splice(i)
-                    setData(preval)
+            for (let i = 0; i < sendVal.bar.length; i++) {
+                if (sendVal.bar[i].x === x) {
+                    sendVal.bar.splice(i)
+                    setData(sendVal)
                     let config = {
                         headers: {
                             key: document.cookie,
                         }
                     }
-                    axios.post('http://localhost:8080/dropCharts',{data:preval},config)
+                    axios.post('http://localhost:8080/dropCharts',{data:sendVal},config)
                     //getCharts()
                     window.location.reload()
                 }

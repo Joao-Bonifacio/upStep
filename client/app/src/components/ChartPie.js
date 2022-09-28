@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import ApexCharts from 'react-apexcharts'
-//import axios from 'axios'
+import axios from 'axios'
 
 export default function ChartPie(){
     
@@ -29,7 +29,26 @@ export default function ChartPie(){
     useEffect(getPie,[])
     
     const addPie = ()=>{
-       console.log('adicionar gráfico')
+       let set = String(prompt('Insert activity=valor: '))
+       let scope = String(prompt('Insert where? (main/secondary/hobbies): '))
+       let sendVal = data
+       let splitSet = set.split('=')
+
+       if (set !== null && scope !== null) {
+    
+       }
+
+       /*
+       let config = {
+            headers: {
+            key: document.cookie,
+            }
+        }
+        axios.post('http://localhost:8080/addCharts',{data:sendVal,first:true},config)
+        //getCharts()
+        window.location.reload()
+       
+       */
     }
     const dropPie = async ()=>{
         console.log('remover gráfico')
@@ -55,7 +74,9 @@ export default function ChartPie(){
                         </div>
                         <div className="modal-body">
                             <ul className='list-group toolbar'>
-                                {}
+                                {data.pie.map( (e, i) =>(
+                                    <li id={e.labels[i]} className='list-group-item'>{e.labels[i]} = {e.series[i]}</li>
+                                ))}
                             </ul>
                                 <button type="button" className="btn p-3" onClick={addPie}>
                                     <i className="fa-solid fa-plus"></i>

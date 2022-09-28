@@ -30,15 +30,15 @@ export default function Road(){
 
         if(priority !== null && title !== null && description !== null && data){
             if (data.cards[0].priority !== 'priority') {
-                let preval = data
-                preval.cards.push({priority:priority,title:title,description:description})
-                setData(preval)
+                let sendVal = data
+                sendVal.cards.push({priority:priority,title:title,description:description})
+                setData(sendVal)
                 let config = {
                     headers: {
                         key: document.cookie,
                     }
                 }
-                axios.post('http://localhost:8080/addCards',{data:preval},config)
+                axios.post('http://localhost:8080/addCards',{data:sendVal},config)
                 getCards()
             }else{
                 setData([{priority:priority,title:title,description:description}])
@@ -47,8 +47,8 @@ export default function Road(){
                     key: document.cookie,
                     }
                 }
-                let preval = data
-                axios.post('http://localhost:8080/addCharts',{data:preval,first:true},config)
+                let sendVal = data
+                axios.post('http://localhost:8080/addCharts',{data:sendVal,first:true},config)
                 getCards()
             }
         }
@@ -56,19 +56,19 @@ export default function Road(){
     
     const dropCard = async ()=>{
         let card = String(prompt('title: '))
-        let preval = data
+        let sendVal = data
         if (card != null) {
-            for (let i = 0; i < preval.cards.length; i++) {
-                console.log(preval.cards[i])
-                if (preval.cards[i].title === card) {
-                    preval.cards.splice(i)
-                    setData(preval)
+            for (let i = 0; i < sendVal.cards.length; i++) {
+                console.log(sendVal.cards[i])
+                if (sendVal.cards[i].title === card) {
+                    sendVal.cards.splice(i)
+                    setData(sendVal)
                     let config = {
                         headers: {
                             key: document.cookie,
                         }
                     }
-                    axios.post('http://localhost:8080/dropCard',{data:preval},config)
+                    axios.post('http://localhost:8080/dropCard',{data:sendVal},config)
                     getCards()
                 }
             }
@@ -106,22 +106,20 @@ export default function Road(){
                     <div className="card-header">Add Card +</div>
                         <div className="card-body">
                             <h5 className="card-title">
-                                <input type='text' placeholder='title' size='13' className="input-road" maxLength='60' required/>
+                                <input type='text' placeholder='title' className="input-road" maxLength='60' required/>
                             </h5>
                             <div className="row">
-                                <p className="card-text col-10 m-0">
-                                    <textarea placeholder="description" className="input-road" maxLength='300' required></textarea>
+                                <p className="card-text col-10 m-0 pl-3">
+                                    <textarea placeholder="description" className="input-road" maxLength='400' style={{width:'100%',height:'80px'}} required></textarea>
                                 </p>
-                                <button type="button" className="btn p-3 col-2" onClick={addCard}>
-                                        <i className="fa-solid fa-plus"></i>
-                                    </button>
+                                <button type="button" className="btn p-0 col-2" onClick={addCard}>
+                                    <i className="fa-solid fa-plus"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-              
-            
 
         </div>
     )
