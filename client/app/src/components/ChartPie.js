@@ -29,11 +29,12 @@ export default function ChartPie(){
     useEffect(getPie,[])
     
     const addPie = ()=>{
-       let setLabel = String(prompt('Insert activity: '))
+       let setLabel = prompt('Insert activity: ')
        let setSerie = Number(prompt('How much time do you dedicate?: '))
-       let scope = String(prompt('Insert where? (main/secondary/hobbies): '))
+       let scope = prompt('Insert where? (main/secondary/hobbies): ')
        let sendVal = data
        setSerie = Number(setSerie)
+       let bypass = true
 
        // eslint-disable-next-line use-isnan
        if (setSerie!== null && setLabel !== null && scope !== null && typeof(setSerie) !== NaN) {
@@ -52,6 +53,7 @@ export default function ChartPie(){
                     sendVal.pie[2].series.push(setSerie)
                     break;
                 default:
+                    bypass = false
                     alert('failed to add activitys')
             }
         }else{
@@ -69,35 +71,57 @@ export default function ChartPie(){
                     sendVal.pie[2].series = [setSerie]
                     break;
                 default:
-                    alert('failed to add activitys')
+                    bypass = false
+                    alert('failed to add activitys, value of chart invalid')
             }
         }
-        setData(sendVal)
-        let config = {
-            headers: {
-                key: document.cookie,
+        if (bypass) {
+            setData(sendVal)
+            let config = {
+                headers: {
+                    key: document.cookie,
+                }
             }
+            axios.post('http://localhost:8080/addPies',{data:sendVal},config)
+            window.location.reload()
         }
-        axios.post('http://localhost:8080/addPies',{data:sendVal},config)
-        window.location.reload()
-       }
+        }
     }
     const dropPie = async ()=>{
-        let x = String(prompt('activity: '))
+        let label = prompt('activity: ')
+        let scope = prompt('Drop where? (main/secondary/hobbies): ')
         let sendVal = data
-        if (x != null) {
-            for (let i = 0; i < sendVal.bar.length; i++) {
-                if (sendVal.bar[i].x === x) {
-                    sendVal.bar.splice(i)
-                    setData(sendVal)
-                    let config = {
-                        headers: {
-                            key: document.cookie,
+        let bypass = true
+
+        if (scope !== null && label !== null) {
+            switch (scope) {
+                case 'main':
+                    scope = 0
+                    break;
+                case 'secondary':
+                    scope = 1
+                    break;
+                case 'hobbie':
+                    scope = 2
+                    break;
+                default:
+                    bypass = false
+                    alert('failed to add activitys, value of chart invalid')
+            }
+
+            if (bypass) {
+                for (let i = 0; i < sendVal.pie[scope].label.length; i++) {
+                    if (sendVal.pie[scope].labels[i] === label) {
+                        sendVal.bar.splice(i)
+                        setData(sendVal)
+                        let config = {
+                            headers: {
+                                key: document.cookie,
+                            }
                         }
+                        axios.post('http://localhost:8080/dropPie',{data:sendVal},config)
+                        window.location.reload()
                     }
-                    axios.post('http://localhost:8080/dropCharts',{data:sendVal},config)
-                    //getCharts()
-                    window.location.reload()
                 }
             }
         }
