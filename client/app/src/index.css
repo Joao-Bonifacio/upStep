@@ -25,3 +25,8 @@ code {
 .apexcharts-menu-icon{
   display: none;
 }
+.input-road{
+  background-color: rgb(95, 95, 95);
+  color: white;
+  resize: none;
+}

@@ -76,9 +76,9 @@ export default function Road(){
     }
     
     return(
-        <div className='container mb-2 bg-white' style={{borderRadius:'8px',padding:'2rem'}}>
+        <div className='container mb-2 bg-white p-3' style={{borderRadius:'8px'/*,padding:'1rem'*/}}>
 
-            <div className="row con">
+            <div className="row">
                 <div className="col-10">road🛣️</div>
                 <div className="col-2" style={{textAlign:'right'}}>
                     <button type="button" className="btn" onClick={dropCard}>
@@ -90,30 +90,32 @@ export default function Road(){
                 </div>
             </div>
 
-            <div className="row mt-2 mb-2">
-                {data.cards.map(e => (
-                    <div className="card text-bg-primary mb-3 col-4 m-2" style={{maxWidth:'18rem'}}>
-                        <div className="card-header">{e.priority}</div>
-                        <div className="card-body">
-                            <h5 className="card-title">{e.title}</h5>
-                            <p className="card-text">{e.description}</p>
+            <div className="p-3">
+                <div className="row mt-2 mb-2">
+                    {data.cards.map(e => (
+                        <div className="card text-bg-primary mb-3 col-4 m-2" style={{maxWidth:'18rem'}}>
+                            <div className="card-header">{e.priority}</div>
+                            <div className="card-body">
+                                <h5 className="card-title">{e.title}</h5>
+                                <p className="card-text">{e.description}</p>
+                            </div>
                         </div>
-                    </div>
-                ))}
-
-            <div className="card text-bg-primary mb-3 col-4 m-2" style={{maxWidth:'18rem'}}>
-                <div className="card-header">Add Card +</div>
-                    <div className="card-body">
-                        <h5 className="card-title">
-                            <input type='text' placeholder='title' size='13' required/>
-                        </h5>
-                        <div className="row">
-                            <p className="card-text col-10 m-0">
-                                <textarea placeholder="description" required></textarea>
-                            </p>
-                            <button type="button" className="btn p-3 col-2" onClick={addCard}>
-                                    <i className="fa-solid fa-plus"></i>
-                                </button>
+                    ))}
+    
+                <div className="card text-bg-primary mb-3 col-4 m-2" style={{maxWidth:'18rem'}}>
+                    <div className="card-header">Add Card +</div>
+                        <div className="card-body">
+                            <h5 className="card-title">
+                                <input type='text' placeholder='title' size='13' className="input-road" maxLength='60' required/>
+                            </h5>
+                            <div className="row">
+                                <p className="card-text col-10 m-0">
+                                    <textarea placeholder="description" className="input-road" maxLength='300' required></textarea>
+                                </p>
+                                <button type="button" className="btn p-3 col-2" onClick={addCard}>
+                                        <i className="fa-solid fa-plus"></i>
+                                    </button>
+                            </div>
                         </div>
                     </div>
                 </div>
