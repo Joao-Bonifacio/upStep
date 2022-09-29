@@ -89,7 +89,7 @@ export default function ChartPie(){
             }
         }  
     }
-    const dropPie = async ()=>{
+    const dropPie = ()=>{
         let label = prompt('activity: ')
         let scope = prompt('Drop where? (main/secondary/hobbies): ')
         let sendVal = data

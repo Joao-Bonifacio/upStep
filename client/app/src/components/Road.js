@@ -17,7 +17,7 @@ export default function Road(){
         }
         fetch('http://localhost:8080/',{ headers: headers })
             .then(res => res.json())
-            .then(res => {if (res.card.length > 0){ setData(res) }})
+            .then(res => {if (res){ setData(res) }})
             .catch(err => console.log(err.message))
     },[])
     
@@ -53,22 +53,26 @@ export default function Road(){
         }
     }
     
-    const dropCard = async ()=>{
+    const dropCard = ()=>{
         let card = prompt('title: ')
-        let sendVal = data
+        let bypass = false
         if (card !== null) {
+            let sendVal = data
             for (let i = 0; i < sendVal.card.length; i++) {
                 if (sendVal.card[i].title === card) {
                     sendVal.card.splice(i,1)
                     setData(sendVal)
-                    let config = {
-                        headers: {
-                            key: document.cookie,
-                        }
-                    }
-                    axios.post('http://localhost:8080/dropCards',{data:sendVal},config)
-                    window.location.reload()
+                    bypass = true
                 }
+            }
+            if (bypass) {
+                let config = {
+                    headers: {
+                        key: document.cookie,
+                    }
+                }
+                axios.post('http://localhost:8080/dropCards',{data:sendVal},config)
+                window.location.reload()
             }
         }
     }

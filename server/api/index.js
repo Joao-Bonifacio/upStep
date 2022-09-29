@@ -178,7 +178,6 @@ app.post('/addCards', cors(corsOptions), async (req,res)=>{
     if (!req.body.first) {
       await db2.chart.findByIdAndUpdate( ck[1], req.body.data )
     }else{
-      console.log(req.body.data.pie)
       await db2.add( ck[1], req.body.data.bar, req.body.data.pie, req.body.card )
     }
     res.json({'status':'ok'})
@@ -192,8 +191,8 @@ app.post('/dropCards', cors(corsOptions), async (req,res)=>{
     let ck = req.headers.key.split('=')
 
     await db2.chart.findByIdAndDelete( ck[1] )
-    await db2.add( ck[1], req.body.data.bar, req.body.data.pie, req.body.card )
-    //await db2.chart.findByIdAndUpdate( ck[1], req.body.data )
+    await db2.add( ck[1], req.body.data.bar, req.body.data.pie, req.body.data.card )
+
     res.json({'status':'ok'})
   }else{
     res.json({error:'cannot drop chart-item'})
