@@ -57,6 +57,7 @@ export default function ChartPie(){
             let setLabel = prompt('Insert activity: ')
             let setSerie = Number(prompt('How much time do you dedicate?: '))
             let scope = prompt('Insert where? (main/secondary/hobbies): ')
+            let bypass = true
 
             switch (scope) {
                 case 'main':
@@ -69,10 +70,11 @@ export default function ChartPie(){
                     scope = 2
                     break;
                 default:
+                    bypass = false
                     alert('failed to add activitys')
             }
             // eslint-disable-next-line use-isnan
-            if (setSerie !== null && setLabel !== null && scope !== null && typeof(setSerie) !== NaN) {
+            if (setSerie !== null && setLabel !== null && scope !== null && typeof(setSerie) !== NaN && bypass) {
                 sendVal.pie[scope].labels.push(setLabel)
                 sendVal.pie[scope].series.push(setSerie)
             
@@ -109,7 +111,7 @@ export default function ChartPie(){
                     alert('failed to add activitys, value of chart invalid')
             }
 
-            if (bypass) {
+            if (bypass && (sendVal.pie[scope].labels.length >= 2 || sendVal.pie[scope].series.length >= 2)) {
                 for (let i = 0; i < sendVal.pie[scope].label.length; i++) {
                     if (sendVal.pie[scope].labels[i] === label) {
                         sendVal.bar.splice(i)
@@ -123,6 +125,8 @@ export default function ChartPie(){
                         window.location.reload()
                     }
                 }
+            }else{
+                alert('insert a new activity before drop item')
             }
         }
     }
