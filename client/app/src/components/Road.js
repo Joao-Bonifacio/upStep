@@ -17,7 +17,7 @@ export default function Road(){
         }
         fetch('http://localhost:8080/',{ headers: headers })
             .then(res => res.json())
-            .then(res => {if (res){ setData(res) }})
+            .then(res => {if (res.card.length > 0){ setData(res) }})
             .catch(err => console.log(err.message))
     },[])
     
@@ -27,6 +27,7 @@ export default function Road(){
 
         if(title !== null && description !== null && data){
             let priority = prompt('priority: ')
+
             if (data.card[0].priority !== 'priority') {
                 let sendVal = data
                 sendVal.card.push({priority:priority,title:title,description:description})
@@ -39,13 +40,13 @@ export default function Road(){
                 axios.post('http://localhost:8080/addCards',{data:sendVal},config)
                 window.location.reload()
             }else{
-                setData([{priority:priority,title:title,description:description}])
                 let config = {
                     headers: {
                     key: document.cookie,
                     }
                 }
                 let sendVal = data
+                sendVal.card[0] = {priority:priority,title:title,description:description}
                 axios.post('http://localhost:8080/addCharts',{data:sendVal},config)
                 window.location.reload()
             }
