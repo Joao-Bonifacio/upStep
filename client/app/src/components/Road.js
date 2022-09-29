@@ -1,4 +1,4 @@
-import { React, useState/*, useEffect*/ } from "react"
+import { React, useState, useEffect } from "react"
 import axios from "axios"
 
 export default function Road(){
@@ -6,7 +6,7 @@ export default function Road(){
         cards:[{priority:'priority',title:'title',description:'description'}]
     })
 
-    const getCards = ()=>{
+    useEffect(()=>{
         let headers = {
             method: 'GET',
             accept: 'application/json',
@@ -19,9 +19,7 @@ export default function Road(){
             .then(res => res.json())
             .then(res => {if (res){ setData(res) }})
             .catch(err => console.log(err.message))
-    }
-
-    //useEffect(getCards,[])
+    },[])
     
     const addCard = ()=>{
         let priority = document.getElementById('priority').value
@@ -39,7 +37,7 @@ export default function Road(){
                     }
                 }
                 axios.post('http://localhost:8080/addCards',{data:sendVal},config)
-                getCards()
+                window.location.reload()
             }else{
                 setData([{priority:priority,title:title,description:description}])
                 let config = {
@@ -49,7 +47,7 @@ export default function Road(){
                 }
                 let sendVal = data
                 axios.post('http://localhost:8080/addCharts',{data:sendVal,first:true},config)
-                getCards()
+                window.location.reload()
             }
         }
     }
@@ -57,7 +55,7 @@ export default function Road(){
     const dropCard = async ()=>{
         let card = String(prompt('title: '))
         let sendVal = data
-        if (card != null) {
+        if (card !== null) {
             for (let i = 0; i < sendVal.cards.length; i++) {
                 console.log(sendVal.cards[i])
                 if (sendVal.cards[i].title === card) {
@@ -69,7 +67,7 @@ export default function Road(){
                         }
                     }
                     axios.post('http://localhost:8080/dropCard',{data:sendVal},config)
-                    getCards()
+                    window.location.reload()
                 }
             }
         }

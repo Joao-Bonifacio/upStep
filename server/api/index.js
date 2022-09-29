@@ -169,6 +169,37 @@ app.post('/dropPies', cors(corsOptions), async (req,res)=>{
   }
 })
 
+//cards
+app.post('/addCards', cors(corsOptions), async (req,res)=>{
+  if (req.headers.key) {
+    const db2 = require('./db_charts')
+    let ck = req.headers.key.split('=')
+
+    if (!req.body.first) {
+      await db2.chart.findByIdAndUpdate( ck[1], req.body.data )
+    }else{
+      console.log(req.body.data.pie)
+      await db2.add( ck[1], req.body.data.bar, req.body.data.pie, req.body.card )
+    }
+    res.json({'status':'ok'})
+  }else{
+    res.json({error:'cannot add chart-item'})
+  }
+})
+app.post('/dropCards', cors(corsOptions), async (req,res)=>{
+  if (req.headers.key){
+    const db2 = require('./db_charts')
+    let ck = req.headers.key.split('=')
+
+    await db2.chart.findByIdAndDelete( ck[1] )
+    await db2.add( ck[1], req.body.data.bar, req.body.data.pie, req.body.card )
+    //await db2.chart.findByIdAndUpdate( ck[1], req.body.data )
+    res.json({'status':'ok'})
+  }else{
+    res.json({error:'cannot drop chart-item'})
+  }
+})
+
 //const id = '04ff27090f4978d7f32636422abfb4e9'
 //const id = '83454535f84c3a2fef0679d707a414be'
 app.listen(port, () => console.log(`running on port ${port}...`))
