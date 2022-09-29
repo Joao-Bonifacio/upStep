@@ -3,7 +3,6 @@ import ApexCharts from 'react-apexcharts'
 import axios from 'axios'
 
 export default function ChartPie(){
-    
     const [data,setData] = useState({
         pie:[
             {series:[1,2,3],labels:['name1','name2','name3']},
@@ -26,7 +25,6 @@ export default function ChartPie(){
             .then(res => setData(res))
             .catch(err => console.log(err.message))
     },[])
-    console.log(data)
     
     const addPie = ()=>{
        let setLabel = prompt('Insert activity: ')
@@ -136,7 +134,7 @@ export default function ChartPie(){
                         <div className="modal-body">
                             <ul className='list-group toolbar'>
                                 {data.pie.map( (e, i) =>(
-                                    <li id={e.labels[i]} className='list-group-item'>{e.labels[i]} = {e.series[i]}</li>
+                                    <li id={e.series} className='list-group-item'>{e.labels[i]} = {e.series[i]}</li>
                                 ))}
                             </ul>
                                 <button type="button" className="btn p-3" onClick={addPie}>
