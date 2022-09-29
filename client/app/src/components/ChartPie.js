@@ -27,51 +27,65 @@ export default function ChartPie(){
     },[])
     
     const addPie = ()=>{
-       let setLabel = prompt('Insert activity: ')
-       let setSerie = Number(prompt('How much time do you dedicate?: '))
-       let scope = prompt('Insert where? (main/secondary/hobbies): ')
-       let sendVal = data
-       setSerie = Number(setSerie)
-       let bypass = true
-       let first;
+        let sendVal = data
+        if (sendVal.pie[0].labels[0] === 'name1') {
+            let setLabelMain = prompt('Insert one of your main activity: ')
+            let setSerieMain = Number(prompt('How much time do you dedicate?: '))
+            let setLabelSecondary = prompt('Insert one of secondary your activity: ')
+            let setSerieSecondary = Number(prompt('How much time do you dedicate?: '))
+            let setLabelHobbie = prompt('Insert one of your hobbie: ') 
+            let setSerieHobbie = Number(prompt('How much time do you dedicate?: '))
 
-       switch (scope) {
-        case 'main':
-            scope = 0
-            break;
-        case 'secondary':
-            scope = 1
-            break;
-        case 'hobbies':
-            scope = 2
-            break;
-            default:
-                bypass = false
-                alert('failed to add activitys')
-       }
-       // eslint-disable-next-line use-isnan
-       if (setSerie!== null && setLabel !== null && scope !== null && typeof(setSerie) !== NaN) {
-        if (sendVal.pie[scope].labels[0] !== 'name1') {
-            sendVal.pie[scope].labels.push(setLabel)
-            sendVal.pie[scope].series.push(setSerie)
-            first = false
-        }else{
-            sendVal.pie[0].labels = [setLabel]
-            sendVal.pie[0].series = [setSerie]
-            first = true
-        }
+            if (setLabelMain !== null && setSerieMain !== null && setLabelSecondary !== null && setSerieSecondary !== null && setLabelHobbie !== null && setSerieHobbie !== null) {
+                sendVal.pie[0].labels[0] = [setLabelMain]
+                sendVal.pie[0].series[0] = [setSerieMain]
+                sendVal.pie[1].labels[0] = [setLabelSecondary]
+                sendVal.pie[1].series[0] = [setSerieSecondary]
+                sendVal.pie[2].labels[0] = [setLabelHobbie]
+                sendVal.pie[2].series[0] = [setSerieHobbie]
 
-        if (bypass) {
-            setData(sendVal)
-            let config = {
-                headers: {
-                    key: document.cookie,
+                setData(sendVal)
+                let config = {
+                    headers: {
+                        key: document.cookie,
+                    }
                 }
+                axios.post('http://localhost:8080/addPies',{data:sendVal},config)
+                window.location.reload()                
             }
-            axios.post('http://localhost:8080/addPies',{data:sendVal,first:first},config)
-            window.location.reload()
-        }
-        }
+        }else{
+            let setLabel = prompt('Insert activity: ')
+            let setSerie = Number(prompt('How much time do you dedicate?: '))
+            let scope = prompt('Insert where? (main/secondary/hobbies): ')
+
+            switch (scope) {
+                case 'main':
+                    scope = 0
+                    break;
+                case 'secondary':
+                    scope = 1
+                    break;
+                case 'hobbies':
+                    scope = 2
+                    break;
+                default:
+                    alert('failed to add activitys')
+            }
+            // eslint-disable-next-line use-isnan
+            if (setSerie !== null && setLabel !== null && scope !== null && typeof(setSerie) !== NaN) {
+                sendVal.pie[scope].labels.push(setLabel)
+                sendVal.pie[scope].series.push(setSerie)
+            
+                setData(sendVal)
+                let config = {
+                    headers: {
+                        key: document.cookie,
+                    }
+                }
+                axios.post('http://localhost:8080/addPies',{data:sendVal},config)
+                window.location.reload()
+            }
+        }  
     }
     const dropPie = async ()=>{
         let label = prompt('activity: ')
