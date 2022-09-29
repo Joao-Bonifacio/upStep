@@ -18,7 +18,7 @@ export default function ChartPie(){
             key: document.cookie,
             redirect: 'follow',
             origin: 'same-origin',
-            scope: 'chartbar'
+            scope: 'chart'
         }
         fetch('http://localhost:8080/',{ headers: headers })
             .then(res => res.json())
@@ -114,7 +114,7 @@ export default function ChartPie(){
             if (bypass && (sendVal.pie[scope].labels.length >= 2 || sendVal.pie[scope].series.length >= 2)) {
                 for (let i = 0; i < sendVal.pie[scope].label.length; i++) {
                     if (sendVal.pie[scope].labels[i] === label) {
-                        sendVal.bar.splice(i)
+                        sendVal.bar.splice(i,1)
                         setData(sendVal)
                         let config = {
                             headers: {

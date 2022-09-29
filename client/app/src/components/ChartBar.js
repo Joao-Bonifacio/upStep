@@ -16,7 +16,7 @@ export default function ChartBar(){
             key: document.cookie,
             redirect: 'follow',
             origin: 'same-origin',
-            scope: 'chartbar'
+            scope: 'chart'
         }
         fetch('http://localhost:8080',{ headers: headers })
             .then(res => res.json())
@@ -46,7 +46,6 @@ export default function ChartBar(){
                     }
                 }
                 axios.post('http://localhost:8080/addCharts',{data:sendVal},config)
-                //getCharts()
                 window.location.reload()
             }else{
                 let sendVal = {
@@ -60,7 +59,6 @@ export default function ChartBar(){
                     }
                 }
                 axios.post('http://localhost:8080/addCharts',{data:sendVal,first:true},config)
-                //getCharts()
                 window.location.reload()
             }
         }
@@ -71,7 +69,7 @@ export default function ChartBar(){
         if (x != null) {
             for (let i = 0; i < sendVal.bar.length; i++) {
                 if (sendVal.bar[i].x === x) {
-                    sendVal.bar.splice(i)
+                    sendVal.bar.splice(i,1)
                     setData(sendVal)
                     let config = {
                         headers: {
@@ -79,7 +77,6 @@ export default function ChartBar(){
                         }
                     }
                     axios.post('http://localhost:8080/dropCharts',{data:sendVal},config)
-                    //getCharts()
                     window.location.reload()
                 }
             }
@@ -129,7 +126,6 @@ export default function ChartBar(){
                                 {data.bar.map((e,i) => ( 
                                     <li id={i} className='list-group-item'> 
                                         {e.x} - level:{e.y} - expected: {e.goals[0].value}
-                                        <span id={`${i}-edit` }></span>
                                     </li>
                                 ))}
                             </ul>

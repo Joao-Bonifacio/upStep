@@ -53,7 +53,7 @@ app.get('/', cors(corsOptions),async ( req,res )=>{
     
 
     //response---
-    if (req.headers.scope === 'chartbar') {
+    if (req.headers.scope === 'chart') {
       const data = await db2.chart.findById(ck[1])
       res.json(data)
     }else{

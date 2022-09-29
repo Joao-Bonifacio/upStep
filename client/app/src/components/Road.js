@@ -3,7 +3,7 @@ import axios from "axios"
 
 export default function Road(){
     const [data,setData] = useState({
-        cards:[{priority:'priority',title:'title',description:'description'}]
+        card:[{priority:'priority',title:'title',description:'description'}]
     })
 
     useEffect(()=>{
@@ -13,23 +13,24 @@ export default function Road(){
             key: document.cookie,
             redirect: 'follow',
             origin: 'same-origin',
-            //scope: 'cards'
+            scope: 'chart'
         }
         fetch('http://localhost:8080/',{ headers: headers })
             .then(res => res.json())
             .then(res => {if (res){ setData(res) }})
             .catch(err => console.log(err.message))
     },[])
+    console.log(data.card)
     
     const addCard = ()=>{
-        let priority = document.getElementById('priority').value
         let title = document.getElementById('title').value
         let description = document.getElementById('desc').value
 
-        if(priority !== null && title !== null && description !== null && data){
-            if (data.cards[0].priority !== 'priority') {
+        if(title !== null && description !== null && data){
+            let priority = prompt('priority: ')
+            if (data.card[0].priority !== 'priority') {
                 let sendVal = data
-                sendVal.cards.push({priority:priority,title:title,description:description})
+                sendVal.card.push({priority:priority,title:title,description:description})
                 setData(sendVal)
                 let config = {
                     headers: {
@@ -46,27 +47,26 @@ export default function Road(){
                     }
                 }
                 let sendVal = data
-                axios.post('http://localhost:8080/addCharts',{data:sendVal,first:true},config)
+                axios.post('http://localhost:8080/addCharts',{data:sendVal},config)
                 window.location.reload()
             }
         }
     }
     
     const dropCard = async ()=>{
-        let card = String(prompt('title: '))
+        let card = prompt('title: ')
         let sendVal = data
         if (card !== null) {
-            for (let i = 0; i < sendVal.cards.length; i++) {
-                console.log(sendVal.cards[i])
-                if (sendVal.cards[i].title === card) {
-                    sendVal.cards.splice(i)
+            for (let i = 0; i < sendVal.card.length; i++) {
+                if (sendVal.card[i].title === card) {
+                    sendVal.card.splice(i,1)
                     setData(sendVal)
                     let config = {
                         headers: {
                             key: document.cookie,
                         }
                     }
-                    axios.post('http://localhost:8080/dropCard',{data:sendVal},config)
+                    axios.post('http://localhost:8080/dropCards',{data:sendVal},config)
                     window.location.reload()
                 }
             }
@@ -90,25 +90,25 @@ export default function Road(){
 
             <div className="p-3">
                 <div className="row mt-2 mb-2">
-                    {data.cards.map(e => (
-                        <div className="card text-bg-primary mb-3 col-4 m-2" style={{maxWidth:'18rem'}}>
-                            <div className="card-header">{e.priority}</div>
-                            <div className="card-body">
-                                <h5 className="card-title">{e.title}</h5>
-                                <p className="card-text">{e.description}</p>
-                            </div>
+                {data.card.map((e,i) => (
+                    <div className="card text-bg-primary mb-3 col-4 m-2" id={String(i)} style={{maxWidth:'18rem'}}>
+                        <div className="card-header">{e.priority}</div>
+                        <div className="card-body">
+                            <h5 className="card-title">{e.title}</h5>
+                            <p className="card-text">{e.description}</p>
                         </div>
-                    ))}
+                    </div>
+                ))}
     
                 <div className="card text-bg-primary mb-3 col-4 m-2" style={{maxWidth:'18rem'}}>
                     <div className="card-header">Add Card +</div>
                         <div className="card-body">
                             <h5 className="card-title">
-                                <input type='text' placeholder='title' className="input-road" maxLength='60' required/>
+                                <input type='text' placeholder='title' id='title' className="input-road" maxLength='60' required/>
                             </h5>
                             <div className="row">
                                 <p className="card-text col-10 m-0 pl-3">
-                                    <textarea placeholder="description" className="input-road" maxLength='400' style={{width:'100%',height:'80px'}} required></textarea>
+                                    <textarea placeholder="description" className="input-road" id='desc' maxLength='400' style={{width:'100%',height:'80px'}} required></textarea>
                                 </p>
                                 <button type="button" className="btn p-0 col-2" onClick={addCard}>
                                     <i className="fa-solid fa-plus"></i>
