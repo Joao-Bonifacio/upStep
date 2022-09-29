@@ -10,27 +10,25 @@ const Schema = db2.Schema
 const chartSchema = new Schema({
     _id:{ type: String },
     bar:{ type: Array },
-    line:{ type: Array }
+    pie:{ type: Array },
+    card:{ type: Array}
 },{collection:'chart'})
 
 //set colection
 const chart = db2.model('charts', chartSchema)
 
 //add chart
-
-const add = async (id,bar,line)=>{
-    await new chart({_id:id,bar:bar,line:line}).save()
+async function add(id, bar, pie, card) {
+    await new chart({ _id: id, bar: bar, pie: pie, card: card }).save()
 }
-//add(id,bar,line)
+//add(id,bar,pie,card)
 
 //get chart
-const get = async (id)=>{
-    if (err) console.log(err.message)
-    const data = await chart.find({id:id})
+async function get(id) {
+    if (err)
+        console.log(err.message)
+    const data = await chart.find({ id: id })
     return data
 }
-
-//update chart
-//...
 
 module.exports = { chart, add, get }

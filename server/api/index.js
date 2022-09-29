@@ -109,6 +109,7 @@ app.post('/signup', cors(corsOptions), async (req,res)=>{
 
 
 //posteriormente, setar uma rota apenas para os dois métodos => (add e drop)
+//bar
 app.post('/addCharts', cors(corsOptions), async (req,res)=>{
   if (req.headers.key) {
     const db2 = require('./db_charts')
@@ -117,7 +118,7 @@ app.post('/addCharts', cors(corsOptions), async (req,res)=>{
     if (!req.body.first) {
       await db2.chart.findByIdAndUpdate( ck[1], req.body.data )
     }else{
-      await db2.add( ck[1], req.body.data.bar, req.body.data.line )
+      await db2.add( ck[1], req.body.data.bar, req.body.data.pie, req.body.card )
     }
     res.json({'status':'ok'})
   }else{
@@ -130,7 +131,37 @@ app.post('/dropCharts', cors(corsOptions), async (req,res)=>{
     let ck = req.headers.key.split('=')
 
     await db2.chart.findByIdAndDelete( ck[1] )
-    await db2.add( ck[1], req.body.data.bar, req.body.data.line )
+    await db2.add( ck[1], req.body.data.bar, req.body.data.pie, req.body.card )
+    res.json({'status':'ok'})
+  }else{
+    res.json({error:'cannot drop chart-item'})
+  }
+})
+
+//pie
+app.post('/addPies', cors(corsOptions), async (req,res)=>{
+  if (req.headers.key) {
+    const db2 = require('./db_charts')
+    let ck = req.headers.key.split('=')
+
+    if (!req.body.first) {
+      await db2.chart.findByIdAndUpdate( ck[1], req.body.data )
+    }else{
+      console.log(req.body.data.pie)
+      await db2.add( ck[1], req.body.data.bar, req.body.data.pie, req.body.card )
+    }
+    res.json({'status':'ok'})
+  }else{
+    res.json({error:'cannot add chart-item'})
+  }
+})
+app.post('/dropPies', cors(corsOptions), async (req,res)=>{
+  if (req.headers.key){
+    const db2 = require('./db_charts')
+    let ck = req.headers.key.split('=')
+
+    await db2.chart.findByIdAndDelete( ck[1] )
+    await db2.add( ck[1], req.body.data.bar, req.body.data.pie, req.body.card )
     //await db2.chart.findByIdAndUpdate( ck[1], req.body.data )
     res.json({'status':'ok'})
   }else{

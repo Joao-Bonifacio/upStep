@@ -15,13 +15,13 @@ export default function Road(){
             origin: 'same-origin',
             //scope: 'cards'
         }
-        fetch('http://localhost:8080/cards',{ headers: headers })
+        fetch('http://localhost:8080/',{ headers: headers })
             .then(res => res.json())
             .then(res => {if (res){ setData(res) }})
             .catch(err => console.log(err.message))
     }
 
-    useEffect(getCards,[])
+    //useEffect(getCards,[])
     
     const addCard = ()=>{
         let priority = document.getElementById('priority').value

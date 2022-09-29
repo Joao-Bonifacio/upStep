@@ -6,27 +6,27 @@ export default function ChartPie(){
     
     const [data,setData] = useState({
         pie:[
-            {series:[1,2,3],labels:['0name1','0name2','0name3']},
-            {series:[1,2,5],labels:['1name1','1name2','1name3']},
-            {series:[2,3,3],labels:['2name1','2name2','2name3']}
+            {series:[1,2,3],labels:['name1','name2','name3']},
+            {series:[1,2,5],labels:['name1','name2','name3']},
+            {series:[2,3,3],labels:['name1','name2','name3']}
         ]
     })
     
-    const getPie = ()=>{
+    useEffect(()=>{
         let headers = {
             method: 'GET',
             accept: 'application/json',
             key: document.cookie,
             redirect: 'follow',
             origin: 'same-origin',
-            scope: 'chartpie'
+            scope: 'chartbar'
         }
-        fetch('http://localhost:8080/pie',{ headers: headers })
+        fetch('http://localhost:8080/',{ headers: headers })
             .then(res => res.json())
-            .then(res => {if (res){ setData(res) }})
+            .then(res => setData(res))
             .catch(err => console.log(err.message))
-    }
-    useEffect(getPie,[])
+    },[])
+    console.log(data)
     
     const addPie = ()=>{
        let setLabel = prompt('Insert activity: ')
@@ -35,46 +35,34 @@ export default function ChartPie(){
        let sendVal = data
        setSerie = Number(setSerie)
        let bypass = true
+       let first;
 
+       switch (scope) {
+        case 'main':
+            scope = 0
+            break;
+        case 'secondary':
+            scope = 1
+            break;
+        case 'hobbies':
+            scope = 2
+            break;
+            default:
+                bypass = false
+                alert('failed to add activitys')
+       }
        // eslint-disable-next-line use-isnan
        if (setSerie!== null && setLabel !== null && scope !== null && typeof(setSerie) !== NaN) {
-        if (sendVal.pie[0].labels[0] !== '0name1') {
-            switch (scope) {
-                case 'main':
-                    sendVal.pie[0].labels.push(setLabel)
-                    sendVal.pie[0].series.push(setSerie)
-                    break;
-                case 'secondary':
-                    sendVal.pie[1].labels.push(setLabel)
-                    sendVal.pie[1].series.push(setSerie)
-                    break;
-                case 'hobbies':
-                    sendVal.pie[2].labels.push(setLabel)
-                    sendVal.pie[2].series.push(setSerie)
-                    break;
-                default:
-                    bypass = false
-                    alert('failed to add activitys')
-            }
+        if (sendVal.pie[scope].labels[0] !== 'name1') {
+            sendVal.pie[scope].labels.push(setLabel)
+            sendVal.pie[scope].series.push(setSerie)
+            first = false
         }else{
-            switch (scope) {
-                case 'main':
-                    sendVal.pie[0].labels = [setLabel]
-                    sendVal.pie[0].series = [setSerie]
-                    break;
-                case 'secondary':
-                    sendVal.pie[1].labels = [setLabel]
-                    sendVal.pie[1].series = [setSerie]
-                    break;
-                case 'hobbies':
-                    sendVal.pie[2].labels = [setLabel]
-                    sendVal.pie[2].series = [setSerie]
-                    break;
-                default:
-                    bypass = false
-                    alert('failed to add activitys, value of chart invalid')
-            }
+            sendVal.pie[0].labels = [setLabel]
+            sendVal.pie[0].series = [setSerie]
+            first = true
         }
+
         if (bypass) {
             setData(sendVal)
             let config = {
@@ -82,7 +70,7 @@ export default function ChartPie(){
                     key: document.cookie,
                 }
             }
-            axios.post('http://localhost:8080/addPies',{data:sendVal},config)
+            axios.post('http://localhost:8080/addPies',{data:sendVal,first:first},config)
             window.location.reload()
         }
         }
