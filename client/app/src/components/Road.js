@@ -20,7 +20,6 @@ export default function Road(){
             .then(res => {if (res){ setData(res) }})
             .catch(err => console.log(err.message))
     },[])
-    console.log(data.card)
     
     const addCard = ()=>{
         let title = document.getElementById('title').value
