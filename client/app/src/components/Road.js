@@ -3,7 +3,7 @@ import axios from "axios"
 
 export default function Road(){
     const [data,setData] = useState({
-        card:[{priority:'priority',title:'title',description:'description'}]
+        card:[{priority:'priority',title:'title exemple',description:'exemple of description of card for note yours goals/strategys'}]
     })
 
     useEffect(()=>{
@@ -17,7 +17,7 @@ export default function Road(){
         }
         fetch('http://localhost:8080/',{ headers: headers })
             .then(res => res.json())
-            .then(res => {if (res){ setData(res) }})
+            .then(res => {if (res.card[0].priority){ setData(res) }})
             .catch(err => console.log(err.message))
     },[])
     
@@ -95,7 +95,7 @@ export default function Road(){
             <div className="p-3">
                 <div className="row mt-2 mb-2">
                 {data.card.map((e,i) => (
-                    <div className="card text-bg-primary mb-3 col-4 m-2" id={String(i)} style={{maxWidth:'18rem'}}>
+                    <div className="card text-bg-primary mb-3 col-4 m-2" id={String(i)} style={{maxWidth:'20rem',minWidth:'20rem'}}>
                         <div className="card-header">{e.priority}</div>
                         <div className="card-body">
                             <h5 className="card-title">{e.title}</h5>
@@ -104,7 +104,7 @@ export default function Road(){
                     </div>
                 ))}
     
-                <div className="card text-bg-primary mb-3 col-4 m-2" style={{maxWidth:'18rem'}}>
+                <div className="card text-bg-primary mb-3 col-4 m-2" style={{maxWidth:'20rem',minWidth:'20rem'}}>
                     <div className="card-header">Add Card +</div>
                         <div className="card-body">
                             <h5 className="card-title">
