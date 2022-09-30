@@ -30,6 +30,10 @@ code {
 .main{
   border-radius: 8px;
   margin-bottom: 30px;
+  box-shadow: 3px -3px #52515178;
+}
+#main-pie{
+  margin-bottom: 8px!important;
 }
 .toolbar{
   text-align: left;
@@ -50,5 +54,4 @@ code {
 }
 .chart-pie{
   width: 400px;
-  height: 400px;
 }

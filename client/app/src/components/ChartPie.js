@@ -134,7 +134,7 @@ export default function ChartPie(){
     }
 
     return(
-        <div className='container bg-light p-3 main'>
+        <div className='container bg-light p-3 main' id='main-pie'>
             
             <div className='row'>
                 <div className='col-10 container'>soldier⏳</div>
@@ -183,7 +183,7 @@ export default function ChartPie(){
 
             <div className='container-sm row text-center m-auto'>
                 <div className='col-4 p-3 chart-pie'>
-                    <div className='text-center'>
+                    <div >
                         <ApexCharts
                             options={{labels:data.pie[0].labels}}
                             series={data.pie[0].series}
@@ -195,7 +195,7 @@ export default function ChartPie(){
                 </div>
 
                 <div className='col-4 p-3 chart-pie'>
-                    <div className='text-center'>
+                    <div >
                         <ApexCharts
                             options={{labels:data.pie[1].labels}}
                             series={data.pie[1].series}
@@ -207,7 +207,7 @@ export default function ChartPie(){
                 </div>
 
                 <div className='col-4 p-3 chart-pie'>
-                    <div className='text-center'>
+                    <div >
                         <ApexCharts
                             options={{labels:data.pie[2].labels}}
                             series={data.pie[2].series}
