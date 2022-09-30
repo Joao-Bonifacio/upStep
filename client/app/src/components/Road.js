@@ -95,7 +95,7 @@ export default function Road(){
             <div className="p-3">
                 <div className="row mt-2 mb-2">
                 {data.card.map((e,i) => (
-                    <div className="card text-bg-primary mb-3 col-4 m-2" id={String(i)} style={{maxWidth:'20rem',minWidth:'20rem'}}>
+                    <div className="card text-bg-primary mb-3 col-4 m-2" id={String(i)} style={{maxWidth:'20rem',minWidth:'20rem',minHeight:'200px'}}>
                         <div className="card-header">{e.priority}</div>
                         <div className="card-body">
                             <h5 className="card-title">{e.title}</h5>
@@ -104,7 +104,7 @@ export default function Road(){
                     </div>
                 ))}
     
-                <div className="card text-bg-primary mb-3 col-4 m-2" style={{maxWidth:'20rem',minWidth:'20rem'}}>
+                <div className="card text-bg-primary mb-3 col-4 m-2" style={{maxWidth:'20rem',minWidth:'20rem',minHeight:'200px'}}>
                     <div className="card-header">Add Card +</div>
                         <div className="card-body">
                             <h5 className="card-title">
