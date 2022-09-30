@@ -55,3 +55,6 @@ code {
 .chart-pie{
   width: 400px;
 }
+.breve{
+  cursor: pointer;
+}
