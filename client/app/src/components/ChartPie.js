@@ -103,7 +103,7 @@ export default function ChartPie(){
                 case 'secondary':
                     scope = 1
                     break;
-                case 'hobbie':
+                case 'hobbies':
                     scope = 2
                     break;
                 default:
@@ -112,19 +112,21 @@ export default function ChartPie(){
             }
 
             if (bypass && (sendVal.pie[scope].labels.length >= 2 || sendVal.pie[scope].series.length >= 2)) {
-                for (let i = 0; i < sendVal.pie[scope].label.length; i++) {
+                for (let i = 0; i < sendVal.pie[scope].labels.length; i++) {
                     if (sendVal.pie[scope].labels[i] === label) {
-                        sendVal.bar.splice(i,1)
-                        setData(sendVal)
-                        let config = {
-                            headers: {
-                                key: document.cookie,
-                            }
-                        }
-                        axios.post('http://localhost:8080/dropPie',{data:sendVal},config)
-                        window.location.reload()
+                        sendVal.pie[scope].labels.splice(i,1)
+                        sendVal.pie[scope].series.splice(i,1)
                     }
                 }
+                
+                let config = {
+                    headers: {
+                        key: document.cookie,
+                    }
+                }
+                axios.post('http://localhost:8080/dropPies',{data:sendVal},config)
+                window.location.reload()
+                
             }else{
                 alert('insert a new activity before drop item')
             }
