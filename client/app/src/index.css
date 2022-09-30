@@ -16,6 +16,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#login{
+  background-color: #CDCDCD;
+  max-width: 400px;
+  border-radius: 8px;
+}
+#signup{
+  background-color: #CDCDCD;
+  max-width: 500px;
+  border-radius: 8px;
+}
+.main{
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
 .toolbar{
   text-align: left;
 }
@@ -29,4 +44,11 @@ code {
   background-color: rgb(176, 158, 158);
   border-radius: 3px;
   resize: none;
+}
+.t-right{
+  text-align: right;
+}
+.chart-pie{
+  width: 400px;
+  height: 400px;
 }

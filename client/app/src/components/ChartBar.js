@@ -103,11 +103,11 @@ export default function ChartBar(){
     }
         
     return(
-    <div className="container bg-light p-3 mb-2" style={{borderRadius:'8px'}}>
+    <div className="container bg-light p-3 mb-2 main">
         <div className='row'>
             <div className='col-6'>chain🔗</div>
 
-            <div className='col-6' style={{cursor:'pointer',right:0,textAlign:'right'}}>
+            <div className='col-6 edit-bar' style={{cursor:'pointer',right:0,textAlign:'right'}}>
 
                 <span>
                     <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">

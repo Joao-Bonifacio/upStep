@@ -134,11 +134,11 @@ export default function ChartPie(){
     }
 
     return(
-        <div className='container bg-light p-3' style={{borderRadius:'8px',margin:'50px auto'}}>
+        <div className='container bg-light p-3 main'>
             
             <div className='row'>
                 <div className='col-10 container'>soldier⏳</div>
-                <div className="col-2" style={{textAlign:'right'}}>
+                <div className="col-2 t-right">
                 <span>
                     <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#pieModal">
                         <i className="fa-solid fa-pen"></i>
@@ -182,19 +182,19 @@ export default function ChartPie(){
             </div>
 
             <div className='container-sm row text-center m-auto'>
-                <div className='col-4 p-3' style={{width:'400px'}}>
+                <div className='col-4 p-3 chart-pie'>
                     <div className='text-center'>
                         <ApexCharts
                             options={{labels:data.pie[0].labels}}
                             series={data.pie[0].series}
                             type="pie"
-                            width={'100%'}
+                            width={'100%'} 
                         />
                         <div>main</div>
                     </div>
                 </div>
 
-                <div className='col-4 p-3' style={{width:'400px'}}>
+                <div className='col-4 p-3 chart-pie'>
                     <div className='text-center'>
                         <ApexCharts
                             options={{labels:data.pie[1].labels}}
@@ -206,7 +206,7 @@ export default function ChartPie(){
                     </div>
                 </div>
 
-                <div className='col-4 p-3' style={{width:'400px'}}>
+                <div className='col-4 p-3 chart-pie'>
                     <div className='text-center'>
                         <ApexCharts
                             options={{labels:data.pie[2].labels}}

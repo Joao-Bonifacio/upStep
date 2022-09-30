@@ -78,7 +78,7 @@ export default function Road(){
     }
     
     return(
-        <div className='container mb-2 bg-white p-3' style={{borderRadius:'8px'/*,padding:'1rem'*/}}>
+        <div className='container bg-white p-3 main'>
 
             <div className="row">
                 <div className="col-10">road🛣️</div>
