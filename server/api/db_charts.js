@@ -21,7 +21,6 @@ const chart = db2.model('charts', chartSchema)
 async function add(id, bar, pie, card) {
     await new chart({ _id: id, bar: bar, pie: pie, card: card }).save()
 }
-//add(id,bar,pie,card)
 
 //get chart
 async function get(id) {

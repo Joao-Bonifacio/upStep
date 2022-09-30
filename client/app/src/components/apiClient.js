@@ -28,7 +28,7 @@ export default function ApiData() {
         return(
             <>
                 <Navbar/>
-                <div className="container mt-5 mb-2 p-2 text-center bg-white main" style={{borderRadius:'8px'}}>Welcome: {usr.name}</div>
+                <div className="container mt-5 mb-2 p-2 text-center bg-white main">Welcome: {usr.name}</div>
                 <ChartBar/>
                 <ChartPie/>
                 <Road/>
