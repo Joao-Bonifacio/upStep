@@ -154,9 +154,10 @@ export default function ChartPie(){
                         <div className="modal-body">
                             <ul className='list-group toolbar'>
                                 {data.pie.map( (e, i) =>(
-                                    <li id={e.series} className='list-group-item'>{e.labels[i]} = {e.series[i]}</li>
+                                    <li id={e.series[i]} className='list-group-item'>{JSON.stringify(e.labels)} =&gt; {JSON.stringify(e.series)}</li>
                                 ))}
                             </ul>
+                            <p></p>
                                 <button type="button" className="btn p-3" onClick={addPie}>
                                     <i className="fa-solid fa-plus"></i>
                                 </button>
