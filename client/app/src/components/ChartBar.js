@@ -110,15 +110,15 @@ export default function ChartBar(){
             <div className='col-6 edit-bar' style={{cursor:'pointer',right:0,textAlign:'right'}}>
 
                 <span>
-                    <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#modalBar">
                         <i className="fa-solid fa-pen"></i>
                     </button>
 
-                    <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal fade" id="modalBar" tabIndex="-1" aria-labelledby="modalBarLabel" aria-hidden="true">
                     <div className="modal-dialog">
                         <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Edit chart</h5>
+                            <h5 className="modal-title" id="modalBarLabel">Edit chart</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
@@ -137,20 +137,29 @@ export default function ChartBar(){
                                     <i className="fa-solid fa-trash"></i>
                                 </button>
                         </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary">Close</button>
-                            <button type="button" className="btn btn-primary" 
-                            onClick={(e)=> {e.preventDefault();window.location.reload()}}>Save changes</button>
-                        </div>
                         </div>
                     </div>
                     </div>
                 </span>
 
                 <span>
-                    <button type="button" className="btn">
+                    <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#modalBarInfo">
                         <i class="fa-solid fa-circle-info"></i>
                     </button>
+
+                    <div className="modal fade" id="modalBarInfo" tabIndex="-1" aria-labelledby="modalBarInfoLabel" aria-hidden="true">
+                        <div className="modal-dialog">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title" id="modalBarInfoLabel">info</h5>
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div className="modal-body">
+                                    oi
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </span>
 
             </div>

@@ -86,9 +86,23 @@ export default function Road(){
                     <button type="button" className="btn" onClick={dropCard}>
                         <i className="fa-solid fa-trash"></i>
                     </button>
-                    <button type="button" className="btn">
+                    <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#modalCardInfo">
                         <i class="fa-solid fa-circle-info"></i>
                     </button>
+
+                    <div className="modal fade" id="modalCardInfo" tabIndex="-1" aria-labelledby="modalCardInfoLabel" aria-hidden="true">
+                        <div className="modal-dialog">
+                            <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="modalCardInfoLabel">info</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body">
+                                oi
+                            </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
