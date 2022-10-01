@@ -37,7 +37,7 @@ export default function Road(){
                         key: document.cookie,
                     }
                 }
-                axios.post('http://localhost:8080/addCards',{data:sendVal},config)
+                axios.post('http://localhost:8080/addCharts',{data:sendVal},config)
                 window.location.reload()
             }else{
                 let config = {
@@ -71,7 +71,7 @@ export default function Road(){
                         key: document.cookie,
                     }
                 }
-                axios.post('http://localhost:8080/dropCards',{data:sendVal},config)
+                axios.post('http://localhost:8080/dropCharts',{data:sendVal},config)
                 window.location.reload()
             }
         }
@@ -93,13 +93,14 @@ export default function Road(){
                     <div className="modal fade" id="modalCardInfo" tabIndex="-1" aria-labelledby="modalCardInfoLabel" aria-hidden="true">
                         <div className="modal-dialog">
                             <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title" id="modalCardInfoLabel">info</h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div className="modal-body">
-                                oi
-                            </div>
+                                <div className="modal-header">
+                                    <h5 className="modal-title" id="modalCardInfoLabel">The Road🛣️</h5>
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div className="modal-body" style={{textAlign:'justify'}}>
+                                    <p>Keep your mind in the clouds, but watch your steps so you don't fall into the mud</p>
+                                    <p>Believing in your journey is very important, but it is not enough, it is also necessary to define well each important step and commit to fulfilling it without deviating from the journey (set of these steps).</p>
+                                </div>
                             </div>
                         </div>
                     </div>

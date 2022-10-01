@@ -50,7 +50,7 @@ export default function ChartPie(){
                         key: document.cookie,
                     }
                 }
-                axios.post('http://localhost:8080/addPies',{data:sendVal},config)
+                axios.post('http://localhost:8080/addCharts',{data:sendVal},config)
                 window.location.reload()                
             }
         }else{
@@ -84,7 +84,7 @@ export default function ChartPie(){
                         key: document.cookie,
                     }
                 }
-                axios.post('http://localhost:8080/addPies',{data:sendVal},config)
+                axios.post('http://localhost:8080/addCharts',{data:sendVal},config)
                 window.location.reload()
             }
         }  
@@ -124,7 +124,7 @@ export default function ChartPie(){
                         key: document.cookie,
                     }
                 }
-                axios.post('http://localhost:8080/dropPies',{data:sendVal},config)
+                axios.post('http://localhost:8080/dropCharts',{data:sendVal},config)
                 window.location.reload()
                 
             }else{
@@ -177,11 +177,12 @@ export default function ChartPie(){
                         <div className="modal-dialog">
                             <div className="modal-content">
                                 <div className="modal-header">
-                                    <h5 className="modal-title" id="modalPieInfoLabel">info</h5>
+                                    <h5 className="modal-title" id="modalPieInfoLabel">The Soldier⏳</h5>
                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div className="modal-body">
-                                    oi
+                                <div className="modal-body" style={{textAlign:'justify'}}>
+                                    <p>The soldier's minute</p>
+                                    <p>Every minute is important and decisive, as in a war, you will have to deal with forces that try to pull you down, and a minute more or less can be what will dictate who was the winner of this war.</p>
                                 </div>
                             </div>
                         </div>

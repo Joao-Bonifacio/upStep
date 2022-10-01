@@ -151,11 +151,12 @@ export default function ChartBar(){
                         <div className="modal-dialog">
                             <div className="modal-content">
                                 <div className="modal-header">
-                                    <h5 className="modal-title" id="modalBarInfoLabel">info</h5>
+                                    <h5 className="modal-title" id="modalBarInfoLabel">The Chain🔗</h5>
                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div className="modal-body">
-                                    oi
+                                <div className="modal-body" style={{textAlign:'justify'}}>
+                                    <p>The total strength of a chain = the strength of the weakest link.</p>
+                                    <p>Each link represents knowledge, most urgently improve what you know least about, and repeat the cycle by re-evaluating metrics, so link by link the whole chain gets stronger.</p>
                                 </div>
                             </div>
                         </div>
