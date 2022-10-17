@@ -2,7 +2,7 @@ const db2 = require('mongoose')
 
 //connect mongodb
 db2.Promise = global.Promise
-db2.connect('mongodb+srv://jhow:jhow044@upstep.fkjjkmz.mongodb.net/?retryWrites=true&w=majority')
+db2.connect('# string-connection #')
 .then(()=>{ console.log('db2 connect...') }).catch((err)=>{ console.log('failed to connect db2...',err.message) })
 
 //set model
